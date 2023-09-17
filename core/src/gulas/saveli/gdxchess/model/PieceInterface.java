@@ -1,4 +1,4 @@
-package gulas.saveli.gdxchess.model;
+package model;
 
 public interface PieceInterface {
     byte MAX_COORDINATE_VALUE = 7;

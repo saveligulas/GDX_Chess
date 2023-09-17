@@ -1,6 +1,6 @@
-package gulas.saveli.gdxchess.model;
+package model;
 
-import gulas.saveli.error.CoordinateOutOfBoundsException;
+import error.CoordinateOutOfBoundsException;
 import lombok.Data;
 
 @Data

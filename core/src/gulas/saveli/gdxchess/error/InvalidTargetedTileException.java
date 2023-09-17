@@ -1,4 +1,4 @@
-package gulas.saveli.gdxchess.error;
+package error;
 
 public class InvalidTargetedTileException extends RuntimeException {
     public InvalidTargetedTileException() {

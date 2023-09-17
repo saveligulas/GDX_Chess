@@ -1,4 +1,4 @@
-package gulas.saveli.gdxchess.error;
+package error;
 
 public class CoordinateOutOfBoundsException extends RuntimeException {
     public CoordinateOutOfBoundsException() {

@@ -1,4 +1,4 @@
-package gulas.saveli.gdxchess;
+package app;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;

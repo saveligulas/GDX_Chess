@@ -27,6 +27,7 @@ allprojects {
         aiVersion = '1.8.2'
         gdxControllersVersion = '2.2.1'
         lombok = '1.18.20'
+        junitVersion = '4.13.2'
     }
 
     repositories {
@@ -74,9 +75,13 @@ project(":core") {
 
 
     dependencies {
+        compileOnly "org.projectlombok:lombok:$lombok"
+        annotationProcessor "org.projectlombok:lombok:$lombok"
+
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         api "org.projectlombok:lombok:$lombok"
+        api "junit:junit:$junitVersion"
     }
 }

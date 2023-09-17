@@ -1,4 +1,4 @@
-package gulas.saveli.gdxchess.Board;
+package board;
 
 import lombok.Data;
 

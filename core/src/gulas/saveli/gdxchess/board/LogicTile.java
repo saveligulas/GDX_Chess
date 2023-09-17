@@ -1,7 +1,7 @@
-package gulas.saveli.gdxchess.Board;
+package board;
 
-import gulas.saveli.model.Piece;
 import lombok.Data;
+import model.Piece;
 
 @Data
 public class LogicTile {

@@ -3,7 +3,7 @@ package gulas.saveli.gdxchess.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import gulas.saveli.gdxchess.ChessGame;
+import app.ChessGame;
 
 public class HtmlLauncher extends GwtApplication {
 

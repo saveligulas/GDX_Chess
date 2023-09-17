@@ -1,9 +1,9 @@
-package gulas.saveli.gdxchess.pieces;
+package pieces;
 
-import gulas.saveli.error.CoordinateOutOfBoundsException;
-import gulas.saveli.model.Piece;
-import gulas.saveli.model.Piece_Type;
+import error.CoordinateOutOfBoundsException;
 import lombok.Setter;
+import model.Piece;
+import model.Piece_Type;
 
 public class Pawn extends Piece {
     @Setter

@@ -1,11 +1,11 @@
-package gulas.saveli.gdxchess.pieces;
+package pieces;
 
-import gulas.saveli.Board.ChessBoard;
-import gulas.saveli.Board.LogicTile;
-import gulas.saveli.error.InvalidTargetedTileException;
-import gulas.saveli.error.InvalidTileSelectionException;
-import gulas.saveli.model.PieceInterface;
-import gulas.saveli.model.Piece_Type;
+import board.ChessBoard;
+import board.LogicTile;
+import error.InvalidTargetedTileException;
+import error.InvalidTileSelectionException;
+import model.PieceInterface;
+import model.Piece_Type;
 
 public class PieceMovement implements PieceInterface {
 

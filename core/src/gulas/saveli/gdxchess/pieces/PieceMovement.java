@@ -46,7 +46,11 @@ public class PieceMovement implements PieceInterface {
 
     private void checkIfTargetedTileIsAccessible(Piece_Type piece_type, ChessBoard board, byte selectionIndex, byte targetIndex) {
         if (piece_type == Piece_Type.PAWN) {
+            try {
+                checkIfPawnCanMove();
+            } catch (RuntimeException e) {
 
+            }
         }
 
         if (piece_type == Piece_Type.KING) {

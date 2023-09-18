@@ -4,6 +4,7 @@ import board.ChessBoard;
 import board.LogicTile;
 import error.InvalidTargetedTileException;
 import error.InvalidTileSelectionException;
+import error.PieceUnableToReachTileException;
 import model.PieceInterface;
 import model.Piece_Type;
 
@@ -48,7 +49,7 @@ public class PieceMovement implements PieceInterface {
         if (piece_type == Piece_Type.PAWN) {
             try {
                 checkIfPawnCanMove();
-            } catch (RuntimeException e) {
+            } catch (PieceUnableToReachTileException e) {
 
             }
         }

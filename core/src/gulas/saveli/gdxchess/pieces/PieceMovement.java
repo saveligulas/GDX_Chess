@@ -47,35 +47,34 @@ public class PieceMovement implements PieceInterface {
     }
 
     private void checkIfTargetedTileIsAccessible(Piece_Type piece_type, ChessBoard board, byte selectionIndex, byte targetIndex) {
-        if (piece_type == Piece_Type.PAWN) {
-            try {
-                checkIfPawnCanMove(board, selectionIndex, targetIndex);
-            } catch (PieceUnableToReachTileException e) {
-
-            } catch (PieceMoveCausesCheckException e) {
+        try {
+            if (piece_type == Piece_Type.PAWN) {
 
             }
+
+            if (piece_type == Piece_Type.KING) {
+
+            }
+
+            if (piece_type == Piece_Type.KNIGHT) {
+
+            }
+
+            if (piece_type == Piece_Type.BISHOP) {
+
+            }
+
+            if (piece_type == Piece_Type.ROOK) {
+
+            }
+
+            if (piece_type == Piece_Type.QUEEN) {
+
+            }
+        } catch (PieceUnableToReachTileException e) {
+
         }
 
-        if (piece_type == Piece_Type.KING) {
-
-        }
-
-        if (piece_type == Piece_Type.KNIGHT) {
-
-        }
-
-        if (piece_type == Piece_Type.BISHOP) {
-
-        }
-
-        if (piece_type == Piece_Type.ROOK) {
-
-        }
-
-        if (piece_type == Piece_Type.QUEEN) {
-
-        }
     }
 
     private void checkIfPawnCanMove(ChessBoard board, byte selectionIndex, byte targetIndex) {

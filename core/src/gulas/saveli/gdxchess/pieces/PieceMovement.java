@@ -16,9 +16,7 @@ public class PieceMovement implements PieceInterface {
         try {
             LogicTile selectedTile = getLogicTileFromBoard(board, selectionIndex);
             LogicTile targetTile = getLogicTileFromBoard(board, targetIndex);
-            if (!checkIfTileHasSameColor(board, selectionIndex)) {
-                throw new InvalidTileSelectionException();
-            }
+            checkTargetedAndSelectedTile(board, selectedTile, targetTile);
             checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             System.out.println(e.getMessage());
@@ -87,12 +85,13 @@ public class PieceMovement implements PieceInterface {
         }
     }
 
-    private boolean checkIfTileHasSameColor(ChessBoard board, byte index) {
-        LogicTile tile = getLogicTileFromBoard(board, index);
-        if (tile.getPieceOnTile() == null) {
+    private void checkTargetedAndSelectedTile(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+        if (selectedTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }
-        return tile.getPieceOnTile().isColorIsWhite() == board.isMoveOrderWhite();
+        if (targetTile.getPieceOnTile().isColorIsWhite() == board.isMoveOrderWhite()) {
+            throw new InvalidTargetedTileException();
+        }
     }
     @Override
     public void removeFromBoard() {

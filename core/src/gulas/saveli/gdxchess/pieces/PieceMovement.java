@@ -14,7 +14,10 @@ public class PieceMovement implements PieceInterface {
         byte targetIndex = LogicTile.getIndex(x_coordinate_target, y_coordinate_target);
 
         try {
-            pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(board, selectionIndex);
+            LogicTile tile = getLogicTileFromBoard(board, selectionIndex);
+            if (!checkIfTileHasSameColor(board, selectionIndex)) {
+                throw new InvalidTileSelectionException();
+            }
             Piece_Type piece_type = getPieceTypeOfSelectedTile(board, selectionIndex);
             checkIfTargetedTileIsAccessible(piece_type, board, selectionIndex, targetIndex);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
@@ -23,24 +26,11 @@ public class PieceMovement implements PieceInterface {
         } catch (InvalidTargetedTileException e) {
             System.out.println(e.getMessage());
             return null;
+        } catch (ArrayIndexOutOfBoundsException e) {
+
         }
 
         return board;
-    }
-
-    private void pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(ChessBoard board, byte selectionIndex) {
-        LogicTile selectedLogicTile = getLogicTileFromBoard(board, selectionIndex);
-        if (selectedLogicTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite()) {
-            throw new InvalidTileSelectionException();
-        }
-    }
-
-    private void pieceOnTargetedTileCanBeCaptured(ChessBoard board, byte selectionIndex, byte targetIndex) {
-        LogicTile selectedLogicTile = getLogicTileFromBoard(board, selectionIndex);
-        LogicTile targetLogicTile = getLogicTileFromBoard(board, targetIndex);
-        if (selectedLogicTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite()) {
-
-        }
     }
 
     private Piece_Type getPieceTypeOfSelectedTile(ChessBoard board, byte selectionIndex) {
@@ -101,7 +91,7 @@ public class PieceMovement implements PieceInterface {
     private LogicTile getLogicTileFromBoard(ChessBoard board, byte index) {
         LogicTile[] logicTiles = board.getLogicTiles();
         try {
-            LogicTile tile = logicTiles[index];
+            return logicTiles[index];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new CoordinateOutOfBoundsException();
         }

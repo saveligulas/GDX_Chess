@@ -10,7 +10,7 @@ public class LogicTile {
 
     private Piece pieceOnTile = null;
 
-    public static LogicTile[] getStandard64Tiles() {
+    public static LogicTile[] getStandard64Tiles() { //TODO add Pieces to these tiles
         LogicTile[] logicTiles = new LogicTile[64];
         for(byte rows = 0; rows < 8; rows++) {
             for(byte columns = 0; columns < 8; columns++) {

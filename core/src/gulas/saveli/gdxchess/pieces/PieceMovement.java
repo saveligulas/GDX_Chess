@@ -2,10 +2,7 @@ package pieces;
 
 import board.ChessBoard;
 import board.LogicTile;
-import error.InvalidTargetedTileException;
-import error.InvalidTileSelectionException;
-import error.PieceMoveCausesCheckException;
-import error.PieceUnableToReachTileException;
+import error.*;
 import jdk.jpackage.internal.Log;
 import model.PieceInterface;
 import model.Piece_Type;
@@ -41,11 +38,13 @@ public class PieceMovement implements PieceInterface {
     private void pieceOnTargetedTileCanBeCaptured(ChessBoard board, byte selectionIndex, byte targetIndex) {
         LogicTile selectedLogicTile = getLogicTileFromBoard(board, selectionIndex);
         LogicTile targetLogicTile = getLogicTileFromBoard(board, targetIndex);
+        if (selectedLogicTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite()) {
+
+        }
     }
 
     private Piece_Type getPieceTypeOfSelectedTile(ChessBoard board, byte selectionIndex) {
-        LogicTile[] boardLogicTiles = board.getLogicTiles();
-        LogicTile selectedLogicTile = boardLogicTiles[selectionIndex];
+        LogicTile selectedLogicTile = getLogicTileFromBoard(board, selectionIndex);
         if (selectedLogicTile.getPieceOnTile() == null) {
             throw new InvalidTileSelectionException();
         }
@@ -101,9 +100,20 @@ public class PieceMovement implements PieceInterface {
 
     private LogicTile getLogicTileFromBoard(ChessBoard board, byte index) {
         LogicTile[] logicTiles = board.getLogicTiles();
-        return logicTiles[index];
+        try {
+            LogicTile tile = logicTiles[index];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new CoordinateOutOfBoundsException();
+        }
     }
 
+    private boolean checkIfTileHasSameColor(ChessBoard board, byte index) {
+        LogicTile tile = getLogicTileFromBoard(board, index);
+        if (tile.getPieceOnTile() == null) {
+            throw new InvalidTileSelectionException();
+        }
+        return tile.getPieceOnTile().isColorIsWhite() == board.isMoveOrderWhite();
+    }
     @Override
     public void removeFromBoard() {
     }

@@ -1,4 +1,4 @@
-package pieces;
+package board;
 
 import board.ChessBoard;
 import board.LogicTile;

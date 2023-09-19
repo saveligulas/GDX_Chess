@@ -14,11 +14,12 @@ public class PieceMovement implements PieceInterface {
         byte targetIndex = LogicTile.getIndex(x_coordinate_target, y_coordinate_target);
 
         try {
-            LogicTile tile = getLogicTileFromBoard(board, selectionIndex);
+            LogicTile selectedTile = getLogicTileFromBoard(board, selectionIndex);
+            LogicTile targetTile = getLogicTileFromBoard(board, targetIndex);
             if (!checkIfTileHasSameColor(board, selectionIndex)) {
                 throw new InvalidTileSelectionException();
             }
-            checkIfTargetedTileIsAccessible(tile.getPieceOnTile().getType(), board, selectionIndex, targetIndex);
+            checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             System.out.println(e.getMessage());
             return null;
@@ -32,10 +33,11 @@ public class PieceMovement implements PieceInterface {
         return board;
     }
 
-    private void checkIfTargetedTileIsAccessible(Piece_Type piece_type, ChessBoard board, byte selectionIndex, byte targetIndex) {
+
+    private void checkIfTargetedTileIsAccessible(Piece_Type piece_type, ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
         try {
             if (piece_type == Piece_Type.PAWN) {
-                checkIfPawnCanMove(board, selectionIndex, targetIndex);
+                checkIfPawnCanMove(board, selectedTile, targetTile);
             }
 
             if (piece_type == Piece_Type.KING) {
@@ -64,10 +66,7 @@ public class PieceMovement implements PieceInterface {
         }
     }
 
-    private void checkIfPawnCanMove(ChessBoard board, byte selectionIndex, byte targetIndex) {
-        LogicTile[] logicTiles = board.getLogicTiles();
-        LogicTile selectedLogicTile = logicTiles[selectionIndex];
-        LogicTile targetedLogicTile = logicTiles[targetIndex];
+    private void checkIfPawnCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
         if (board.isMoveOrderWhite()) {
 
         } else {

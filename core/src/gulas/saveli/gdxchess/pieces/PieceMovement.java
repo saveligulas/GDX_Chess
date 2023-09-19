@@ -19,13 +19,11 @@ public class PieceMovement implements PieceInterface {
             checkTargetedAndSelectedTile(board, selectedTile, targetTile);
             checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
-            System.out.println(e.getMessage());
             return null;
         } catch (InvalidTargetedTileException e) {
-            System.out.println(e.getMessage());
             return null;
         } catch (ArrayIndexOutOfBoundsException e) {
-
+            return null;
         }
 
         return board;
@@ -39,40 +37,56 @@ public class PieceMovement implements PieceInterface {
             }
 
             if (piece_type == Piece_Type.KING) {
-
+                checkIfKingCanMove(board, selectedTile, targetTile);
             }
 
             if (piece_type == Piece_Type.KNIGHT) {
-
+                checkIfKnightCanMove(board, selectedTile, targetTile);
             }
 
             if (piece_type == Piece_Type.BISHOP) {
-
+                checkIfBishopCanMove(board, selectedTile, targetTile);
             }
 
             if (piece_type == Piece_Type.ROOK) {
-
+                checkIfRookCanMove(board, selectedTile, targetTile);
             }
 
             if (piece_type == Piece_Type.QUEEN) {
-
+                checkIfQueenCanMove(board, selectedTile, targetTile);
             }
         } catch (PieceUnableToReachTileException e) {
-
+            return;
         } catch (PieceMoveCausesCheckException e) {
-
+            return;
         }
     }
 
     private void checkIfPawnCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
         if (board.isMoveOrderWhite()) {
-
+            return;
         } else {
-
+            return;
         }
     }
 
-    private void checkIfKingCanMove(ChessBoard board, byte selectionIndex, byte targetIndex) {
+    private void checkIfKingCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+
+    }
+
+    private void checkIfKnightCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+
+    }
+
+    private void checkIfBishopCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+
+    }
+
+    private void checkIfRookCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+
+    }
+
+    private void checkIfQueenCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
 
     }
 

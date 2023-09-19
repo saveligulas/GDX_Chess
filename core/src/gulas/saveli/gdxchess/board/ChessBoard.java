@@ -6,7 +6,7 @@ import lombok.Data;
 public class ChessBoard {
     private final LogicTile[] logicTiles;
 
-    private boolean moveOrderIsWhite = true;
+    private boolean moveOrderWhite = true;
 
     public ChessBoard() {
         this.logicTiles = LogicTile.getStandard64Tiles();

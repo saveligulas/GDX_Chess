@@ -6,6 +6,7 @@ import error.InvalidTargetedTileException;
 import error.InvalidTileSelectionException;
 import error.PieceMoveCausesCheckException;
 import error.PieceUnableToReachTileException;
+import jdk.jpackage.internal.Log;
 import model.PieceInterface;
 import model.Piece_Type;
 
@@ -31,15 +32,15 @@ public class PieceMovement implements PieceInterface {
     }
 
     private void pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(ChessBoard board, byte selectionIndex) {
-        LogicTile[] boardLogicTiles = board.getLogicTiles();
-        LogicTile selectedLogicTile = boardLogicTiles[selectionIndex];
+        LogicTile selectedLogicTile = getLogicTileFromBoard(board, selectionIndex);
         if (selectedLogicTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }
     }
 
     private void pieceOnTargetedTileCanBeCaptured(ChessBoard board, byte selectionIndex, byte targetIndex) {
-
+        LogicTile selectedLogicTile = getLogicTileFromBoard(board, selectionIndex);
+        LogicTile targetLogicTile = getLogicTileFromBoard(board, targetIndex);
     }
 
     private Piece_Type getPieceTypeOfSelectedTile(ChessBoard board, byte selectionIndex) {
@@ -96,6 +97,11 @@ public class PieceMovement implements PieceInterface {
 
     private void checkIfKingCanMove(ChessBoard board, byte selectionIndex, byte targetIndex) {
 
+    }
+
+    private LogicTile getLogicTileFromBoard(ChessBoard board, byte index) {
+        LogicTile[] logicTiles = board.getLogicTiles();
+        return logicTiles[index];
     }
 
     @Override

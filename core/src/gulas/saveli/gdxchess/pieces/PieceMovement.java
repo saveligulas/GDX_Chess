@@ -12,10 +12,8 @@ import model.Piece_Type;
 public class PieceMovement implements PieceInterface {
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection, byte x_coordinate_target, byte y_coordinate_target ) {
-        boolean playerIsWhite = board.isMoveOrderWhite();
-
         try {
-            pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(playerIsWhite, board, x_coordinate_selection, y_coordinate_selection);
+            pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(board, x_coordinate_selection, y_coordinate_selection);
             Piece_Type piece_type = getPieceTypeOfSelectedTile(board, x_coordinate_selection, y_coordinate_selection);
             checkIfTargetedTileIsAccessible(piece_type, board, LogicTile.getIndex(x_coordinate_selection, y_coordinate_selection), LogicTile.getIndex(x_coordinate_target, y_coordinate_target));
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
@@ -29,12 +27,16 @@ public class PieceMovement implements PieceInterface {
         return board;
     }
 
-    private void pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(boolean colorIsWhite, ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection) {
+    private void pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection) {
         LogicTile[] boardLogicTiles = board.getLogicTiles();
         LogicTile selectedLogicTile = boardLogicTiles[LogicTile.getIndex(x_coordinate_selection, y_coordinate_selection)];
-        if (selectedLogicTile.getPieceOnTile().isColorIsWhite() != colorIsWhite) {
+        if (selectedLogicTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }
+    }
+
+    private void pieceOnTargetedTileCanBeCaptured(ChessBoard board, byte selectionIndex, byte targetIndex) {
+
     }
 
     private Piece_Type getPieceTypeOfSelectedTile(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection) {
@@ -82,7 +84,9 @@ public class PieceMovement implements PieceInterface {
         LogicTile[] logicTiles = board.getLogicTiles();
         LogicTile selectedLogicTile = logicTiles[selectionIndex];
         LogicTile targetedLogicTile = logicTiles[targetIndex];
-        if(board.isMoveOrderWhite()) {
+        if (board.isMoveOrderWhite()) {
+
+        } else {
 
         }
     }

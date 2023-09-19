@@ -17,8 +17,8 @@ public class PieceMovement implements PieceInterface {
 
         try {
             pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(board, selectionIndex);
-            Piece_Type piece_type = getPieceTypeOfSelectedTile(board, x_coordinate_selection, y_coordinate_selection);
-            checkIfTargetedTileIsAccessible(piece_type, board, LogicTile.getIndex(x_coordinate_selection, y_coordinate_selection), LogicTile.getIndex(x_coordinate_target, y_coordinate_target));
+            Piece_Type piece_type = getPieceTypeOfSelectedTile(board, selectionIndex);
+            checkIfTargetedTileIsAccessible(piece_type, board, selectionIndex, targetIndex);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             System.out.println(e.getMessage());
             return null;
@@ -42,9 +42,9 @@ public class PieceMovement implements PieceInterface {
 
     }
 
-    private Piece_Type getPieceTypeOfSelectedTile(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection) {
+    private Piece_Type getPieceTypeOfSelectedTile(ChessBoard board, byte selectionIndex) {
         LogicTile[] boardLogicTiles = board.getLogicTiles();
-        LogicTile selectedLogicTile = boardLogicTiles[LogicTile.getIndex(x_coordinate_selection, y_coordinate_selection)];
+        LogicTile selectedLogicTile = boardLogicTiles[selectionIndex];
         if (selectedLogicTile.getPieceOnTile() == null) {
             throw new InvalidTileSelectionException();
         }

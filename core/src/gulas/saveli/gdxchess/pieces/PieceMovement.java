@@ -12,7 +12,7 @@ import model.Piece_Type;
 public class PieceMovement implements PieceInterface {
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection, byte x_coordinate_target, byte y_coordinate_target ) {
-        boolean playerIsWhite = board.isMoveOrderIsWhite();
+        boolean playerIsWhite = board.isMoveOrderWhite();
 
         try {
             pieceOnSelectedTileHasPlayersColorAndTileIsNotEmpty(playerIsWhite, board, x_coordinate_selection, y_coordinate_selection);
@@ -49,7 +49,7 @@ public class PieceMovement implements PieceInterface {
     private void checkIfTargetedTileIsAccessible(Piece_Type piece_type, ChessBoard board, byte selectionIndex, byte targetIndex) {
         try {
             if (piece_type == Piece_Type.PAWN) {
-
+                checkIfPawnCanMove(board, selectionIndex, targetIndex);
             }
 
             if (piece_type == Piece_Type.KING) {
@@ -73,14 +73,22 @@ public class PieceMovement implements PieceInterface {
             }
         } catch (PieceUnableToReachTileException e) {
 
-        }
+        } catch (PieceMoveCausesCheckException e) {
 
+        }
     }
 
     private void checkIfPawnCanMove(ChessBoard board, byte selectionIndex, byte targetIndex) {
         LogicTile[] logicTiles = board.getLogicTiles();
         LogicTile selectedLogicTile = logicTiles[selectionIndex];
         LogicTile targetedLogicTile = logicTiles[targetIndex];
+        if(board.isMoveOrderWhite()) {
+
+        }
+    }
+
+    private void checkIfKingCanMove(ChessBoard board, byte selectionIndex, byte targetIndex) {
+
     }
 
     @Override

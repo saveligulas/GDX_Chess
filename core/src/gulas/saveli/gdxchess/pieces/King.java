@@ -8,4 +8,14 @@ public class King extends Piece {
         super(isWhite);
         setType(Piece_Type.KING);
     }
+
+    @Override
+    public String toString() {
+        String king = "King";
+        if (isColorIsWhite()) {
+            return "White " + king;
+        } else {
+            return "Black " + king;
+        }
+    }
 }

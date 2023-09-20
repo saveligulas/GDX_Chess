@@ -7,6 +7,12 @@ public class King extends Piece {
     public King(boolean isWhite) {
         super(isWhite);
         setType(Piece_Type.KING);
+        if (isWhite) {
+            setRow((byte) 0);
+        } else {
+            setRow((byte) 7);
+        }
+        setColumn((byte) 4);
     }
 
     @Override

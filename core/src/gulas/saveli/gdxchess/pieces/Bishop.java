@@ -26,4 +26,9 @@ public class Bishop extends Piece {
 
         setColumn(column);
     }
+
+    @Override
+    public String toString() {
+        return specification + "-Colored Bishop";
+    }
 }

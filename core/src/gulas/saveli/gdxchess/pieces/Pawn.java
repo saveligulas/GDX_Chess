@@ -26,7 +26,8 @@ public class Pawn extends Piece {
         }
     }
 
-    public String getPawnNameFromStartingPosition() {
+    @Override
+    public String toString() {
         return COLUMN_CHARACTERS[startingColumn] + "-" + "Pawn";
     }
 }

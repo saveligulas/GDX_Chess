@@ -56,4 +56,12 @@ public class PieceMovementLogicTest { //TODO extend method to also check for cor
             assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.KNIGHT);
         }
     }
+
+    @Test
+    public void testRookPosition() {
+        indexesToCheck = new byte[] {0, 7, 56, 63};
+        for (byte index : indexesToCheck) {
+            assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.ROOK);
+        }
+    }
 }

@@ -71,5 +71,12 @@ public class LogicTile {
             return new Bishop(false, column);
         }
 
+        if (index == 3) {
+            return new Queen(true);
+        }
+        if (index == 59) {
+            return new Queen(false);
+        }
+        throw new NoPieceToPlaceOnTileException();
     }
 }

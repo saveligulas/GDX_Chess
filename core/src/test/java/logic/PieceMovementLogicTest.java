@@ -35,13 +35,25 @@ public class PieceMovementLogicTest { //TODO extend method to also check for cor
 
     @Test
     public void testQueenPosition() {
-        assertEquals(tiles[3].getPieceOnTile().getType(), Piece_Type.QUEEN);
-        assertEquals(tiles[59].getPieceOnTile().getType(), Piece_Type.QUEEN);
+        indexesToCheck = new byte[] {3, 59};
+        for (byte index : indexesToCheck) {
+            assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.QUEEN);
+        }
     }
 
     @Test
     public void testBishopPosition() {
-        assertEquals(tiles[2].getPieceOnTile().getType(), Piece_Type.BISHOP);
-        assertEquals(tiles[58].getPieceOnTile().getType(), Piece_Type.BISHOP);
+        indexesToCheck = new byte[] {2, 5, 58, 61};
+        for (byte index : indexesToCheck) {
+            assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.BISHOP);
+        }
+    }
+
+    @Test
+    public void testKnightPosition() {
+        indexesToCheck = new byte[] {1, 6, 57, 62};
+        for (byte index : indexesToCheck) {
+            assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.KNIGHT);
+        }
     }
 }

@@ -107,6 +107,12 @@ public class PieceMovement implements PieceInterface {
             throw new InvalidTargetedTileException();
         }
     }
+
+    @Override
+    public char[] twoCharPieceInsigne() {
+        return new char[0];
+    }
+
     @Override
     public void removeFromBoard() {
     }

@@ -26,6 +26,48 @@ public class Piece implements PieceInterface {
         }
     }
 
+    public String getInsigne() {
+        StringBuilder sb = new StringBuilder();
+        char[] ins = twoCharPieceInsigne();
+        sb.append(ins[0]);
+        sb.append(ins[1]);
+        return sb.toString();
+    }
+
+    @Override
+    public char[] twoCharPieceInsigne() {
+        char color;
+        char sign = 'e';
+        if (colorIsWhite) {
+            color = 'w';
+        } else {
+            color = 'b';
+        }
+        char[] insigne = new char[2];
+        insigne[0] = color;
+
+        if (type == Piece_Type.PAWN) {
+            sign = 'P';
+        }
+        if (type == Piece_Type.KING) {
+            sign = 'K';
+        }
+        if (type == Piece_Type.KNIGHT) {
+            sign = 'N';
+        }
+        if (type == Piece_Type.ROOK) {
+            sign = 'R';
+        }
+        if (type == Piece_Type.BISHOP) {
+            sign = 'B';
+        }
+        if (type == Piece_Type.QUEEN) {
+            sign = 'Q';
+        }
+        insigne[1] = sign;
+        return insigne;
+    }
+
     @Override
     public void removeFromBoard() {
         this.column = -1;

@@ -12,6 +12,7 @@ import static org.junit.Assert.assertEquals;
 public class PieceMovementLogicTest { //TODO extend method to also check for correct color
     private static ChessBoard chessBoard;
     private static LogicTile[] tiles;
+    private static byte[] indexesToCheck;
 
     @BeforeClass
     public static void setUpChessBoard() {
@@ -19,14 +20,17 @@ public class PieceMovementLogicTest { //TODO extend method to also check for cor
     }
 
     @Before
-    public void setUpLogicTiles() {
+    public void setUpLogicTilesAndIndexes() {
         tiles = chessBoard.getLogicTiles();
+        indexesToCheck = null;
     }
 
     @Test
     public void testKingPosition() {
-        assertEquals(tiles[4].getPieceOnTile().getType(), Piece_Type.KING);
-        assertEquals(tiles[60].getPieceOnTile().getType(), Piece_Type.KING);
+        indexesToCheck = new byte[] {4, 60};
+        for (byte index : indexesToCheck) {
+            assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.KING);
+        }
     }
 
     @Test
@@ -36,7 +40,7 @@ public class PieceMovementLogicTest { //TODO extend method to also check for cor
     }
 
     @Test
-    public void testBishopPosition(LogicTile[] tiles) {
+    public void testBishopPosition() {
         assertEquals(tiles[2].getPieceOnTile().getType(), Piece_Type.BISHOP);
         assertEquals(tiles[58].getPieceOnTile().getType(), Piece_Type.BISHOP);
     }

@@ -4,9 +4,7 @@ import error.NoPieceToPlaceOnTileException;
 import lombok.Data;
 import model.Piece;
 import model.Piece_Type;
-import pieces.King;
-import pieces.Knight;
-import pieces.Pawn;
+import pieces.*;
 
 @Data
 public class LogicTile {
@@ -56,7 +54,22 @@ public class LogicTile {
             return new Knight(true, column);
         }
         if (index == 57 || index == 62) {
-            return new Knight()
+            return new Knight(false, column);
         }
+
+        if (index == 0 || index == 7) {
+            return new Rook(true, column);
+        }
+        if (index == 56 || index == 63) {
+            return new Rook(false, column);
+        }
+
+        if (index == 2 || index == 5) {
+         return new Bishop(true, column);
+        }
+        if (index == 58 || index == 61) {
+            return new Bishop(false, column);
+        }
+
     }
 }

@@ -4,6 +4,7 @@ import error.NoPieceToPlaceOnTileException;
 import lombok.Data;
 import model.Piece;
 import model.Piece_Type;
+import pieces.King;
 import pieces.Pawn;
 
 @Data
@@ -41,6 +42,13 @@ public class LogicTile {
         }
         if (row == 6) {
             return new Pawn(false, column);
+        }
+
+        if (index == 4) {
+            return new King(true);
+        }
+        if (index == 60) {
+            return new King(false);
         }
     }
 }

@@ -64,4 +64,19 @@ public class PieceMovementLogicTest { //TODO extend method to also check for cor
             assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.ROOK);
         }
     }
+
+    @Test
+    public void testPawnPosition() {
+        indexesToCheck = new byte[16];
+        for (int i = 0; i < indexesToCheck.length; i++) {
+            if (i < 8) {
+                indexesToCheck[i] = LogicTile.getIndex((byte) i, (byte) 1);
+            } else {
+                indexesToCheck[i] = LogicTile.getIndex((byte) ((byte) i/2), (byte) 6);
+            }
+        }
+        for (byte index : indexesToCheck) {
+            assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.PAWN);
+        }
+    }
 }

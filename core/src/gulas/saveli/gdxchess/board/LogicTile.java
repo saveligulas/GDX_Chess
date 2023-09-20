@@ -5,6 +5,7 @@ import lombok.Data;
 import model.Piece;
 import model.Piece_Type;
 import pieces.King;
+import pieces.Knight;
 import pieces.Pawn;
 
 @Data
@@ -49,6 +50,13 @@ public class LogicTile {
         }
         if (index == 60) {
             return new King(false);
+        }
+
+        if (index == 1 || index == 6) {
+            return new Knight(true, column);
+        }
+        if (index == 57 || index == 62) {
+            return new Knight()
         }
     }
 }

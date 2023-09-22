@@ -9,7 +9,7 @@ import model.PieceInterface;
 import model.Piece_Type;
 
 public class PieceMovement implements PieceInterface {
-    boolean targetTileHasOpposingPiece;
+    boolean targetTileHasOpposingPiece = false;
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection, byte x_coordinate_target, byte y_coordinate_target ) {
         byte selectionIndex = LogicTile.getIndex(x_coordinate_selection, y_coordinate_selection);

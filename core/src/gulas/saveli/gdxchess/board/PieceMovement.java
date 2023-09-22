@@ -4,10 +4,12 @@ import board.ChessBoard;
 import board.LogicTile;
 import error.*;
 import jdk.jpackage.internal.Log;
+import lombok.Setter;
 import model.PieceInterface;
 import model.Piece_Type;
 
 public class PieceMovement implements PieceInterface {
+    boolean targetTileHasOpposingPiece;
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection, byte x_coordinate_target, byte y_coordinate_target ) {
         byte selectionIndex = LogicTile.getIndex(x_coordinate_selection, y_coordinate_selection);
@@ -105,6 +107,9 @@ public class PieceMovement implements PieceInterface {
         }
         if (targetTile.getPieceOnTile().isColorIsWhite() == board.isMoveOrderWhite()) {
             throw new InvalidTargetedTileException();
+        }
+        if (targetTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite() && targetTile.getPieceOnTile() != null) {
+            targetTileHasOpposingPiece = true;
         }
     }
 

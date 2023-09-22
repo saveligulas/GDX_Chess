@@ -4,7 +4,7 @@ import model.Piece;
 import model.Piece_Type;
 
 public class Bishop extends Piece {
-    private String specification;
+    private final String specification;
     public Bishop(boolean isWhite, byte column) {
         super(isWhite);
         setType(Piece_Type.BISHOP);

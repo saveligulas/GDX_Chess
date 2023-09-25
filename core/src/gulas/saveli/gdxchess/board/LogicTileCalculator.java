@@ -15,4 +15,8 @@ public class LogicTileCalculator {
     public static byte getIndex(byte x, byte y) {
         return (byte) (y * 8 + x);
     }
+
+
+
+    public static byte getIndexFromDiagonalMove(boolean upwards, byte range, byte )
 }

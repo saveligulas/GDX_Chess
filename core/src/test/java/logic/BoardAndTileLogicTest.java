@@ -2,6 +2,7 @@ package logic;
 
 import board.ChessBoard;
 import board.LogicTile;
+import board.LogicTileCalculator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -16,7 +17,7 @@ public class BoardAndTileLogicTest {
             byte x = logicTile.getX_coordinate();
             byte y = logicTile.getY_coordinate();
 
-            byte calIndex = LogicTile.getIndex(x, y);
+            byte calIndex = LogicTileCalculator.getIndex(x, y);
             LogicTile calLogicTile = board.getLogicTiles()[calIndex];
             if (calLogicTile.equals(logicTile)) {
                 correctTilesFound++;

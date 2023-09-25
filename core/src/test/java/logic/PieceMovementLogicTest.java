@@ -2,6 +2,7 @@ package logic;
 
 import board.ChessBoard;
 import board.LogicTile;
+import board.LogicTileCalculator;
 import model.Piece_Type;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -70,9 +71,9 @@ public class PieceMovementLogicTest { //TODO extend method to also check for cor
         indexesToCheck = new byte[16];
         for (int i = 0; i < indexesToCheck.length; i++) {
             if (i < 8) {
-                indexesToCheck[i] = LogicTile.getIndex((byte) i, (byte) 1);
+                indexesToCheck[i] = LogicTileCalculator.getIndex((byte) i, (byte) 1);
             } else {
-                indexesToCheck[i] = LogicTile.getIndex((byte) ((byte) i/2), (byte) 6);
+                indexesToCheck[i] = LogicTileCalculator.getIndex((byte) ((byte) i/2), (byte) 6);
             }
         }
         for (byte index : indexesToCheck) {

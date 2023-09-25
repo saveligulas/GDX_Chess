@@ -31,21 +31,6 @@ public class LogicTile {
         return logicTiles;
     }
 
-    public static byte getIndex(byte x_coordinate, byte y_coordinate) {
-        return (byte) (y_coordinate * 8 + x_coordinate);
-    }
-
-    public static byte[] getCoordinatesXandY(byte index) {
-        int row = index / 8;
-        int col = index % 8;
-
-        byte[] coordinates = new byte[2];
-        coordinates[0] = (byte) col;
-        coordinates[1] = (byte) row;
-
-        return coordinates;
-    }
-
     private static Piece checkIndexForPossiblePiece(byte index, byte column, byte row) {
         if (row == 1) {
             return new Pawn(true, column);

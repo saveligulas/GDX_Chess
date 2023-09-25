@@ -12,8 +12,8 @@ public class PieceMovement implements PieceInterface {
     boolean targetTileHasOpposingPiece = false;
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection, byte x_coordinate_target, byte y_coordinate_target ) {
-        byte selectionIndex = LogicTile.getIndex(x_coordinate_selection, y_coordinate_selection);
-        byte targetIndex = LogicTile.getIndex(x_coordinate_target, y_coordinate_target);
+        byte selectionIndex = LogicTileCalculator.getIndex(x_coordinate_selection, y_coordinate_selection);
+        byte targetIndex = LogicTileCalculator.getIndex(x_coordinate_target, y_coordinate_target);
 
         try {
             LogicTile selectedTile = getLogicTileFromBoard(board, selectionIndex);

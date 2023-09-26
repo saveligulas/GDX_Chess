@@ -79,7 +79,12 @@ public class PieceMovement implements PieceInterface {
             }
             return;
         }
-        if ()
+        if (LogicTileCalculator.getIndexFromLateralMove(upwards, (byte) 1, selectionIndex) == targetIndex) {
+            if (targetTileHasOpposingPiece) {
+                throw new PieceUnableToReachTileException();
+            }
+        }
+        throw new PieceUnableToReachTileException();
     }
 
     private void checkIfKingCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {

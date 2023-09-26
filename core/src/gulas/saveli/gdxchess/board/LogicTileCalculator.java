@@ -38,7 +38,14 @@ public class LogicTileCalculator {
     }
 
     public static byte[] getIndexesBetweenLateralMove(boolean leftwards, byte range, byte selectedIndex) {
-
+        if (range < 2) {
+            return null;
+        }
+        byte[] indexes = new byte[range-1];
+        for (byte i = 1; i < range; i++) {
+            indexes[i] = getIndexFromLateralMove(leftwards, i, selectedIndex);
+        }
+        return indexes;
     }
 
     public static byte getIndexFromVerticalMove(boolean upwards, byte range, byte selectedIndex) {

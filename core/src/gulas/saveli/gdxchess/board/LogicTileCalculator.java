@@ -21,10 +21,9 @@ public class LogicTileCalculator {
     public static byte getIndexFromDiagonalMove(boolean upwards, boolean leftwards, byte range, byte selectedIndex) {
         byte[] coordinates = getCoordinatesXandY(selectedIndex);
 
-
         coordinates[0] = (byte) (leftwards ? coordinates[0] + range : coordinates[0] - range);
         coordinates[1] = (byte) (upwards ? coordinates[1] + range : coordinates[1] - range);
 
-
+        return getIndex(coordinates[0], coordinates[1]);
     }
 }

@@ -13,6 +13,10 @@ public class LogicTile {
 
     private Piece pieceOnTile = null;
 
+    public byte getIndex() {
+        return LogicTileCalculator.getIndex(this.x_coordinate, this.y_coordinate);
+    }
+
     public static LogicTile[] getStandard64Tiles() {
         LogicTile[] logicTiles = new LogicTile[64];
         for (byte rows = 0; rows < 8; rows++) {

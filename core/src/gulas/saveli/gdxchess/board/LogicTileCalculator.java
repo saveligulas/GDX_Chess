@@ -34,6 +34,14 @@ public class LogicTileCalculator {
         return getIndex(coordinates[0], coordinates[1]);
     }
 
+    public static byte getIndexFromLateralMove(boolean leftwards, byte range, byte selectedIndex) {
+        return (byte) (leftwards ? selectedIndex - range : selectedIndex + range);
+    }
+
+    public static byte getIndexFromVerticalMove(boolean upwards, byte range, byte selectedIndex) {
+        return (byte) (upwards ? selectedIndex + (8*range) : selectedIndex - (8*range));
+    }
+
     public static byte[] getPossibleIndexForKnight(byte selectedIndex) {
 
     }

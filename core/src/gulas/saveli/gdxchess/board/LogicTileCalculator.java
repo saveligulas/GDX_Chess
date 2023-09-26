@@ -26,4 +26,8 @@ public class LogicTileCalculator {
 
         return getIndex(coordinates[0], coordinates[1]);
     }
+
+    public static byte[] getPossibleIndexForKnight(byte selectedIndex) {
+
+    }
 }

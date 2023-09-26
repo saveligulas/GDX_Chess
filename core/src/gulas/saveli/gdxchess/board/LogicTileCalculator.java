@@ -17,7 +17,11 @@ public class LogicTileCalculator {
     }
 
     public static boolean isLeftwards(byte selectedIndex, byte targetIndex) {
-        return  (getCoordinatesXandY(selectedIndex)[0] >= getCoordinatesXandY(targetIndex)[1]);
+        return (getCoordinatesXandY(selectedIndex)[0] >= getCoordinatesXandY(targetIndex)[1]);
+    }
+
+    public static boolean isDiagonal(byte selectedIndex, byte targetIndex) {
+        return (getCoordinatesXandY(selectedIndex)[1] != getCoordinatesXandY(targetIndex)[1]);
     }
 
 

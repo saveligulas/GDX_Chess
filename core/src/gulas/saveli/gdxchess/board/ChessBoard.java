@@ -11,4 +11,8 @@ public class ChessBoard {
     public ChessBoard() {
         this.logicTiles = LogicTile.getStandard64Tiles();
     }
+
+    public void performMove(LogicTile tileWithPieceToMove, LogicTile targetedTile) {
+
+    }
 }

@@ -12,14 +12,22 @@ public class PieceMovement implements PieceInterface {
     boolean targetTileHasOpposingPiece = false;
     byte targetIndex;
     byte selectionIndex;
+    boolean moveIsDiagonal;
+    boolean upwards;
+    boolean leftwards;
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
         selectionIndex = selectedTile.getIndex();
         targetIndex = targetTile.getIndex();
+        moveIsDiagonal = LogicTileCalculator.isDiagonal(selectionIndex, targetIndex);
+        upwards = board.isMoveOrderWhite();
+        leftwards = moveIsDiagonal && LogicTileCalculator.isLeftwards(selectionIndex, targetIndex);
+
 
         try {
             checkTargetedAndSelectedTile(board, selectedTile, targetTile);
             checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
+            board.performMove(selectedTile, targetTile);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             return null;
         } catch (InvalidTargetedTileException e) {
@@ -57,8 +65,6 @@ public class PieceMovement implements PieceInterface {
             if (piece_type == Piece_Type.QUEEN) {
                 checkIfQueenCanMove(board, selectedTile, targetTile);
             }
-
-
         } catch (PieceUnableToReachTileException e) {
             return;
         } catch (PieceMoveCausesCheckException e) {
@@ -67,16 +73,13 @@ public class PieceMovement implements PieceInterface {
     }
 
     private void checkIfPawnCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
-        if (board.isMoveOrderWhite()) {
-            if (LogicTileCalculator.getIndexFromDiagonalMove(true, true, (byte) 1, selectionIndex) == targetIndex ||
-                    LogicTileCalculator.getIndexFromDiagonalMove(true, false, (byte) 1, selectionIndex) == targetIndex) {
-                if (!targetTileHasOpposingPiece) {
-                    throw new PieceUnableToReachTileException();
-                }
+        if (LogicTileCalculator.getIndexFromDiagonalMove(upwards, leftwards, (byte) 1, selectionIndex) == targetIndex) {
+            if (!targetTileHasOpposingPiece) {
+                throw new PieceUnableToReachTileException();
             }
-        } else {
             return;
         }
+        if ()
     }
 
     private void checkIfKingCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {

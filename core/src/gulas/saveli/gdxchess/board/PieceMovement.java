@@ -7,6 +7,7 @@ import jdk.jpackage.internal.Log;
 import lombok.Setter;
 import model.PieceInterface;
 import model.Piece_Type;
+import pieces.Pawn;
 
 public class PieceMovement implements PieceInterface {
     boolean targetTileHasOpposingPiece = false;
@@ -79,9 +80,16 @@ public class PieceMovement implements PieceInterface {
             }
             return;
         }
-        if (LogicTileCalculator.getIndexFromLateralMove(upwards, (byte) 1, selectionIndex) == targetIndex) {
+        if (LogicTileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex) == targetIndex) {
             if (targetTileHasOpposingPiece) {
                 throw new PieceUnableToReachTileException();
+            }
+        }
+        if (LogicTileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex &&
+                selectedTile.getPieceOnTile() instanceof Pawn && ((Pawn) selectedTile.getPieceOnTile()).getPawnHasMoved()) {
+            byte[] tileToCheck = LogicTileCalculator.getIndexesBetweenVerticalMove(upwards, (byte) 2, selectionIndex);
+            if (board.getLogicTiles()[tileToCheck[0]].getPieceOnTile() != null) {
+                throw new PieceBetweenTilesException();
             }
         }
         throw new PieceUnableToReachTileException();

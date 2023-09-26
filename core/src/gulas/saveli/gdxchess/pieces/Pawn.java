@@ -26,7 +26,7 @@ public class Pawn extends Piece {
         }
     }
 
-    public boolean pawnHasMoved() {
+    public boolean getPawnHasMoved() {
         return startingColumn != getColumn();
     }
 

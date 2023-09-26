@@ -10,14 +10,14 @@ import model.Piece_Type;
 
 public class PieceMovement implements PieceInterface {
     boolean targetTileHasOpposingPiece = false;
+    byte targetIndex;
+    byte selectionIndex;
 
-    public ChessBoard returnUpdatedBoard(ChessBoard board, byte x_coordinate_selection, byte y_coordinate_selection, byte x_coordinate_target, byte y_coordinate_target ) {
-        byte selectionIndex = LogicTileCalculator.getIndex(x_coordinate_selection, y_coordinate_selection);
-        byte targetIndex = LogicTileCalculator.getIndex(x_coordinate_target, y_coordinate_target);
+    public ChessBoard returnUpdatedBoard(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+        selectionIndex = selectedTile.getIndex();
+        targetIndex = targetTile.getIndex();
 
         try {
-            LogicTile selectedTile = getLogicTileFromBoard(board, selectionIndex);
-            LogicTile targetTile = getLogicTileFromBoard(board, targetIndex);
             checkTargetedAndSelectedTile(board, selectedTile, targetTile);
             checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
@@ -57,6 +57,8 @@ public class PieceMovement implements PieceInterface {
             if (piece_type == Piece_Type.QUEEN) {
                 checkIfQueenCanMove(board, selectedTile, targetTile);
             }
+
+
         } catch (PieceUnableToReachTileException e) {
             return;
         } catch (PieceMoveCausesCheckException e) {
@@ -66,7 +68,12 @@ public class PieceMovement implements PieceInterface {
 
     private void checkIfPawnCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
         if (board.isMoveOrderWhite()) {
-            return;
+            if (LogicTileCalculator.getIndexFromDiagonalMove(true, true, (byte) 1, selectionIndex) == targetIndex ||
+                    LogicTileCalculator.getIndexFromDiagonalMove(true, false, (byte) 1, selectionIndex) == targetIndex) {
+                if (!targetTileHasOpposingPiece) {
+                    throw new PieceUnableToReachTileException();
+                }
+            }
         } else {
             return;
         }

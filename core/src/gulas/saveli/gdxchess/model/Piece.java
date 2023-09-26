@@ -7,6 +7,7 @@ import lombok.Data;
 public class Piece implements PieceInterface {
     private Piece_Type type;
     private boolean colorIsWhite;
+    //TODO override setters of bytes to set ranges
     private byte column;
     private byte row;
 

@@ -8,6 +8,7 @@ import pieces.*;
 
 @Data
 public class LogicTile {
+    //TODO override setters and add limits
     private byte x_coordinate;
     private byte y_coordinate;
 

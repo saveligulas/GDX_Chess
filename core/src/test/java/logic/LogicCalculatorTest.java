@@ -1,11 +1,20 @@
 package logic;
 
 import board.LogicTileCalculator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class LogicCalculatorTest {
+    MoveData[] verticalData;
+    MoveData[] horizontalData;
+    MoveData[] diagonalData;
+
+    @BeforeClass
+    public void setData() {
+        data = new MoveData[]
+    }
     @Test
     public void testGetIndex() {
         byte[] correctAnswers = new byte[64];

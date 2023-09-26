@@ -16,6 +16,9 @@ public class LogicTileCalculator {
         return (byte) (y * 8 + x);
     }
 
+    public static boolean isLeftwards(byte selectedIndex, byte targetIndex) {
+        return  (getCoordinatesXandY(selectedIndex)[0] >= getCoordinatesXandY(targetIndex)[1]);
+    }
 
 
     public static byte getIndexFromDiagonalMove(boolean upwards, boolean leftwards, byte range, byte selectedIndex) {

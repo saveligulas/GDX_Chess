@@ -24,7 +24,6 @@ public class LogicTileCalculator {
         return (getCoordinatesXandY(selectedIndex)[1] != getCoordinatesXandY(targetIndex)[1]);
     }
 
-
     public static byte getIndexFromDiagonalMove(boolean upwards, boolean leftwards, byte range, byte selectedIndex) {
         byte[] coordinates = getCoordinatesXandY(selectedIndex);
 
@@ -38,11 +37,21 @@ public class LogicTileCalculator {
         return (byte) (leftwards ? selectedIndex - range : selectedIndex + range);
     }
 
+    public static byte[] getIndexesBetweenLateralMove(boolean leftwards, byte range, byte selectedIndex) {
+
+    }
+
     public static byte getIndexFromVerticalMove(boolean upwards, byte range, byte selectedIndex) {
         return (byte) (upwards ? selectedIndex + (8*range) : selectedIndex - (8*range));
     }
 
-    public static byte[] getPossibleIndexForKnight(byte selectedIndex) {
+    public static byte[] getIndexesBetweenVerticalMove(boolean upwards, byte range, byte selectionIndex) {
 
     }
+
+
+
+//    public static byte[] getPossibleIndexForKnight(byte selectedIndex) {
+//
+//    }
 }

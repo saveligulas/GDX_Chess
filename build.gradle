@@ -83,5 +83,8 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         api "org.projectlombok:lombok:$lombok"
         api "junit:junit:$junitVersion"
+
+        testImplementation "junit:junit:$junitVersion"
+        testAnnotationProcessor "org.projectlombok:lombok:$lombok"
     }
 }

@@ -7,13 +7,13 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class LogicCalculatorTest {
-    MoveData[] verticalData;
-    MoveData[] horizontalData;
-    MoveData[] diagonalData;
+    static MoveData[] verticalData;
+    static MoveData[] horizontalData;
+    static MoveData[] diagonalData;
 
     @BeforeClass
-    public void setData() {
-        data = new MoveData[]
+    public static void setData() {
+        verticalData = new MoveData[];
     }
     @Test
     public void testGetIndex() {

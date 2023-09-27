@@ -46,4 +46,12 @@ public class LogicCalculatorTest {
             assertEquals(calculatedAnswers[k], correctAnswers[k]);
         }
     }
+
+    @Test
+    public void testGetIndexVerticalCalculations() {
+        for (MoveData data : verticalData) {
+            byte calculation = LogicTileCalculator.getIndexFromVerticalMove(data.isUpwards(), data.getRange(), data.getStartIndex());
+            assertEquals(calculation, data.getEndIndex());
+        }
+    }
 }

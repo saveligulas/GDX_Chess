@@ -13,7 +13,19 @@ public class LogicCalculatorTest {
 
     @BeforeClass
     public static void setData() {
-        verticalData = new MoveData[];
+        verticalData = new MoveData[5];
+        horizontalData = new MoveData[5];
+        diagonalData = new MoveData[5];
+
+        for (byte i = 0; i < 5; i++) {
+            verticalData[i] = MoveData.builder()
+                    .range(i)
+                    .upwards(i % 2 == 0)
+                    .leftwards(i % 2 != 0)
+                    .startIndex((byte) (25 + i))
+                    .endIndex((byte) (25 + i + ((i % 2 == 0) ? + (8 * i) : - ( 8 * i))))
+                    .build();
+        }
     }
     @Test
     public void testGetIndex() {

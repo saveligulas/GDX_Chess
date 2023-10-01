@@ -33,7 +33,7 @@ public class LogicTileCalculator {
         return getIndex(coordinates[0], coordinates[1]);
     }
 
-    public static byte getIndexFromLateralMove(boolean leftwards, byte range, byte selectedIndex) {
+    public static byte getIndexFromHorizontalMove(boolean leftwards, byte range, byte selectedIndex) {
         return (byte) (leftwards ? selectedIndex - range : selectedIndex + range);
     }
 
@@ -43,7 +43,7 @@ public class LogicTileCalculator {
         }
         byte[] indexes = new byte[range-1];
         for (byte i = 1; i < range; i++) {
-            indexes[i] = getIndexFromLateralMove(leftwards, i, selectedIndex);
+            indexes[i] = getIndexFromHorizontalMove(leftwards, i, selectedIndex);
         }
         return indexes;
     }

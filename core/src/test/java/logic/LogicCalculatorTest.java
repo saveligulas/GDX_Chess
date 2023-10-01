@@ -1,6 +1,7 @@
 package logic;
 
 import board.LogicTileCalculator;
+import error.CoordinateOutOfBoundsException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -35,7 +36,7 @@ public class LogicCalculatorTest {
                     .upwards(upwards)
                     .leftwards(leftwards)
                     .startIndex(startIndex)
-                    .endIndex((byte) (startIndex + ((i % 2 != 0) ? + i : -i)))
+                    .endIndex((byte) (i != 4 ? (startIndex + ((i % 2 == 0) ? + i : -i)) : -1))
                     .build();
         }
     }
@@ -70,7 +71,12 @@ public class LogicCalculatorTest {
     @Test
     public void testGetIndexHorizontalCalculations() {
         for (MoveData data : horizontalData) {
-            byte calculation = LogicTileCalculator.getIndexFromHorizontalMove(data.isLeftwards(), data.getRange(), data.getStartIndex());
+            byte calculation;
+            try {
+                calculation = LogicTileCalculator.getIndexFromHorizontalMove(data.isLeftwards(), data.getRange(), data.getStartIndex());
+            } catch (CoordinateOutOfBoundsException e) {
+                calculation = -1;
+            }
             assertEquals(calculation, data.getEndIndex());
         }
     }

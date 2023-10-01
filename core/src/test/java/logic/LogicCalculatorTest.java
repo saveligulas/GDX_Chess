@@ -18,12 +18,25 @@ public class LogicCalculatorTest {
         diagonalData = new MoveData[5];
 
         for (byte i = 0; i < 5; i++) {
+            byte range = i;
+            boolean upwards = i % 2 == 0;
+            boolean leftwards = i % 2 != 0;
+            byte startIndex = (byte) (25 + i);
+
             verticalData[i] = MoveData.builder()
-                    .range(i)
-                    .upwards(i % 2 == 0)
-                    .leftwards(i % 2 != 0)
-                    .startIndex((byte) (25 + i))
-                    .endIndex((byte) (25 + i + ((i % 2 == 0) ? + (8 * i) : - ( 8 * i))))
+                    .range(range)
+                    .upwards(upwards)
+                    .leftwards(leftwards)
+                    .startIndex(startIndex)
+                    .endIndex((byte) (startIndex + ((i % 2 == 0) ? + (8 * i) : - ( 8 * i))))
+                    .build();
+
+            horizontalData[i] = MoveData.builder()
+                    .range(range)
+                    .upwards(upwards)
+                    .leftwards(leftwards)
+                    .startIndex(startIndex)
+                    .endIndex((byte) (startIndex + ((i % 2 == 0) ? + i : -i)))
                     .build();
         }
     }

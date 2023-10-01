@@ -1,5 +1,7 @@
 package board;
 
+import error.CoordinateOutOfBoundsException;
+
 public class LogicTileCalculator {
     public static byte[] getCoordinatesXandY(byte index) {
         int row = index / 8;
@@ -34,7 +36,15 @@ public class LogicTileCalculator {
     }
 
     public static byte getIndexFromHorizontalMove(boolean leftwards, byte range, byte selectedIndex) {
-        return (byte) (leftwards ? selectedIndex - range : selectedIndex + range);
+        byte startingRow = getCoordinatesXandY(selectedIndex)[1];
+        byte calculatedIndex = (byte) (leftwards ? selectedIndex - range : selectedIndex + range);
+        byte calculatedRow = getCoordinatesXandY(calculatedIndex)[1];
+
+        if (startingRow != calculatedRow) {
+            throw new CoordinateOutOfBoundsException();
+        }
+
+        return calculatedIndex;
     }
 
     public static byte[] getIndexesBetweenLateralMove(boolean leftwards, byte range, byte selectedIndex) {

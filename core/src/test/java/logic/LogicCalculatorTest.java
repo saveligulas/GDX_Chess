@@ -18,13 +18,12 @@ public class LogicCalculatorTest {
         diagonalData = new MoveData[5];
 
         for (byte i = 0; i < 5; i++) {
-            byte range = i;
             boolean upwards = i % 2 == 0;
             boolean leftwards = i % 2 != 0;
             byte startIndex = (byte) (25 + i);
 
             verticalData[i] = MoveData.builder()
-                    .range(range)
+                    .range(i)
                     .upwards(upwards)
                     .leftwards(leftwards)
                     .startIndex(startIndex)
@@ -32,11 +31,11 @@ public class LogicCalculatorTest {
                     .build();
 
             horizontalData[i] = MoveData.builder()
-                    .range(range)
+                    .range(i)
                     .upwards(upwards)
                     .leftwards(leftwards)
                     .startIndex(startIndex)
-                    .endIndex((byte) (startIndex + ((i % 2 == 0) ? + i : -i)))
+                    .endIndex((byte) (startIndex + ((i % 2 != 0) ? + i : -i)))
                     .build();
         }
     }
@@ -64,6 +63,14 @@ public class LogicCalculatorTest {
     public void testGetIndexVerticalCalculations() {
         for (MoveData data : verticalData) {
             byte calculation = LogicTileCalculator.getIndexFromVerticalMove(data.isUpwards(), data.getRange(), data.getStartIndex());
+            assertEquals(calculation, data.getEndIndex());
+        }
+    }
+
+    @Test
+    public void testGetIndexHorizontalCalculations() {
+        for (MoveData data : horizontalData) {
+            byte calculation = LogicTileCalculator.getIndexFromHorizontalMove(data.isLeftwards(), data.getRange(), data.getStartIndex());
             assertEquals(calculation, data.getEndIndex());
         }
     }

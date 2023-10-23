@@ -2,6 +2,9 @@ package board;
 
 import error.CoordinateOutOfBoundsException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LogicTileCalculator {
     public static byte[] getCoordinatesXandY(byte index) {
         int row = index / 8;
@@ -15,6 +18,9 @@ public class LogicTileCalculator {
     }
 
     public static byte getIndex(byte x, byte y) {
+        if (x < 0 || x > 7 || y < 0 || y > 7) {
+            return -1;
+        }
         return (byte) (y * 8 + x);
     }
 
@@ -88,17 +94,29 @@ public class LogicTileCalculator {
         indexes = new byte[maxSize];
         //TODO finish method
         byte counter = 0;
+        indexes[0] = getIndex((byte) (startingColumn + 1), (byte) (startingRow + 2));
+        indexes[1] = getIndex((byte) (startingColumn + 2), (byte) (startingRow + 1));
+        indexes[2] = getIndex((byte) (startingColumn + 2), (byte) (startingRow - 1));
+        indexes[3] = getIndex((byte) (startingColumn + 1), (byte) (startingRow - 2));
+        indexes[4] = getIndex((byte) (startingColumn - 1), (byte) (startingRow - 2));
+        indexes[5] = getIndex((byte) (startingColumn - 2), (byte) (startingRow - 1));
+        indexes[6] = getIndex((byte) (startingColumn - 2), (byte) (startingRow + 1));
+        indexes[7] = getIndex((byte) (startingColumn - 1), (byte) (startingRow + 2));
 
-        byte[] allPossibleIndexes = new byte[8];
-        for (byte i = 0; i < allPossibleIndexes.length; i++) {
-            byte amountRow = (byte) ((counter % 2 == 0) ? 1 : 2);
-            byte amountColumn = (byte) ((counter % 2 != 0 ? 1 : 2));
-            byte targetRow = (byte) (startingRow + ((i % 2 == 0) ? amountRow : -amountRow));
-            byte targetColumn = (byte) (startingColumn + ((i % 2 != 0) ? amountColumn : -amountColumn));
-            allPossibleIndexes[i] = getIndex(targetColumn, targetRow);
-            counter++;
+        List<Byte> allPossibleIndexes = new ArrayList<>();
+
+        for (int i = 0; i < indexes.length; i++) {
+            if (indexes[i] >= 0) {
+                allPossibleIndexes.add(indexes[i]);
+            }
         }
 
-        return allPossibleIndexes;
+        byte[] possibleIndexesArray = new byte[allPossibleIndexes.size()];
+
+        for (int k = 0; k < possibleIndexesArray.length; k++) {
+            possibleIndexesArray[k] = allPossibleIndexes.get(k);
+        }
+
+        return possibleIndexesArray;
     }
 }

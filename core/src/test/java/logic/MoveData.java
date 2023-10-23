@@ -12,5 +12,6 @@ public class MoveData {
     private byte range;
     private byte startIndex;
     private byte endIndex;
+    private byte[] endIndexes;
 
 }

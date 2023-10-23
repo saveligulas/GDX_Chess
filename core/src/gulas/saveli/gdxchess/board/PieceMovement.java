@@ -9,6 +9,8 @@ import model.PieceInterface;
 import model.Piece_Type;
 import pieces.Pawn;
 
+import java.util.Objects;
+
 public class PieceMovement implements PieceInterface {
     boolean targetTileHasOpposingPiece = false;
     byte targetIndex;
@@ -84,13 +86,15 @@ public class PieceMovement implements PieceInterface {
             if (targetTileHasOpposingPiece) {
                 throw new PieceUnableToReachTileException();
             }
+            return;
         }
         if (LogicTileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex &&
                 selectedTile.getPieceOnTile() instanceof Pawn && ((Pawn) selectedTile.getPieceOnTile()).getPawnHasMoved()) {
             byte[] tileToCheck = LogicTileCalculator.getIndexesBetweenVerticalMove(upwards, (byte) 2, selectionIndex);
-            if (board.getLogicTiles()[tileToCheck[0]].getPieceOnTile() != null) {
+            if (board.getLogicTiles()[Objects.requireNonNull(tileToCheck)[0]].getPieceOnTile() != null) {
                 throw new PieceBetweenTilesException();
             }
+            return;
         }
         throw new PieceUnableToReachTileException();
     }

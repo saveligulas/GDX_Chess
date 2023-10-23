@@ -84,16 +84,8 @@ public class LogicTileCalculator {
     public static byte[] getPossibleIndexForKnightMove(byte selectedIndex) {
         byte startingRow = getCoordinatesXandY(selectedIndex)[1];
         byte startingColumn = getCoordinatesXandY(selectedIndex)[0];
-        byte[] indexes;
-        byte maxSize = 8;
-        maxSize = (byte) (maxSize + ((startingColumn < 2 || startingColumn > 5) ? 0 : -2));
-        maxSize = (byte) (maxSize + ((startingColumn < 1 || startingColumn > 6) ? 0 : -2));
-        maxSize = (byte) (maxSize + ((startingRow < 2 || startingRow > 5) ? 0 : -2));
-        maxSize = (byte) (maxSize + ((startingRow < 1 || startingRow > 6) ? 0 : -2));
+        byte[] indexes = new byte[8];
 
-        indexes = new byte[maxSize];
-        //TODO finish method
-        byte counter = 0;
         indexes[0] = getIndex((byte) (startingColumn + 1), (byte) (startingRow + 2));
         indexes[1] = getIndex((byte) (startingColumn + 2), (byte) (startingRow + 1));
         indexes[2] = getIndex((byte) (startingColumn + 2), (byte) (startingRow - 1));
@@ -105,9 +97,9 @@ public class LogicTileCalculator {
 
         List<Byte> allPossibleIndexes = new ArrayList<>();
 
-        for (int i = 0; i < indexes.length; i++) {
-            if (indexes[i] >= 0) {
-                allPossibleIndexes.add(indexes[i]);
+        for (byte index : indexes) {
+            if (index >= 0) {
+                allPossibleIndexes.add(index);
             }
         }
 

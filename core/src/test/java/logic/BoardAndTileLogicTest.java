@@ -3,14 +3,24 @@ package logic;
 import board.ChessBoard;
 import board.LogicTile;
 import board.LogicTileCalculator;
+import model.Piece_Type;
+import org.junit.Before;
 import org.junit.Test;
+import pieces.Pawn;
+import pieces.Rook;
 
 import static org.junit.Assert.assertEquals;
 
 public class BoardAndTileLogicTest {
+    static ChessBoard board;
+
+    @Before
+    public void setup() {
+        board = new ChessBoard();
+    }
+
     @Test
     public void boardAndTileSetCalculationTest() {
-        ChessBoard board = new ChessBoard();
         byte correctTilesFound = 0;
 
         for(LogicTile logicTile : board.getLogicTiles()) {
@@ -24,5 +34,12 @@ public class BoardAndTileLogicTest {
             }
         }
         assertEquals(64, correctTilesFound);
+    }
+
+    @Test
+    public void testBoardMoves() {
+        board.performMove((byte) 0, (byte) 12);
+        assertEquals(board.getRemovedPieces().get(0).getClass(), Pawn.class);
+        assertEquals(board.getLogicTiles()[12].getPieceOnTile().getClass(), Rook.class);
     }
 }

@@ -11,12 +11,14 @@ public class LogicCalculatorTest {
     static MoveData[] verticalData;
     static MoveData[] horizontalData;
     static MoveData[] diagonalData;
+    static MoveData[] knightData;
 
     @BeforeClass
     public static void setData() {
         verticalData = new MoveData[5];
         horizontalData = new MoveData[5];
         diagonalData = new MoveData[5];
+        knightData = new MoveData[2];
 
         for (byte i = 0; i < 5; i++) {
             boolean upwards = i % 2 == 0;
@@ -39,6 +41,24 @@ public class LogicCalculatorTest {
                     .endIndex((byte) (i != 4 ? (startIndex + ((i % 2 == 0) ? + i : -i)) : -1))
                     .build();
         }
+
+        knightData[0] = MoveData.builder()
+                .range((byte) 0)
+                .upwards(false)
+                .leftwards(false)
+                .startIndex((byte) 9)
+                .endIndex((byte) -1)
+                .endIndexes(new byte[] {26, 19, 3, 24})
+                .build();
+
+        knightData[1] = MoveData.builder()
+                .range((byte) 0)
+                .upwards(false)
+                .leftwards(false)
+                .startIndex((byte) 36)
+                .endIndex((byte) -1)
+                .endIndexes(new byte[] {53, 46, 30, 21, 19, 26, 42, 51})
+                .build();
     }
     @Test
     public void testGetIndex() {
@@ -78,6 +98,17 @@ public class LogicCalculatorTest {
                 calculation = -1;
             }
             assertEquals(calculation, data.getEndIndex());
+        }
+    }
+
+    @Test
+    public void testGetIndexForPossibleKnightMoves() {
+        for (MoveData data : knightData) {
+            byte[] calculations = LogicTileCalculator.getPossibleIndexForKnightMove(data.getStartIndex());
+            assertEquals(calculations.length, data.getEndIndexes().length);
+            for (int i = 0; i < calculations.length; i++) {
+                assertEquals(calculations[i], data.getEndIndexes()[i]);
+            }
         }
     }
 }

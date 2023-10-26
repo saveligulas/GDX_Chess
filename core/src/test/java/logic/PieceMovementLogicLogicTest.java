@@ -3,6 +3,7 @@ package logic;
 import board.ChessBoard;
 import board.LogicTile;
 import board.LogicTileCalculator;
+import board.PieceMovementLogic;
 import model.Piece_Type;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -10,8 +11,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PieceMovementLogicTest { //TODO extend method to also check for correct color
+public class PieceMovementLogicLogicTest { //TODO extend method to also check for correct color
     private static ChessBoard chessBoard;
+    private static PieceMovementLogic pieceMovementLogic;
     private static LogicTile[] tiles;
     private static byte[] indexesToCheck;
 
@@ -79,6 +81,11 @@ public class PieceMovementLogicTest { //TODO extend method to also check for cor
         for (byte index : indexesToCheck) {
             assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.PAWN);
         }
+    }
+
+    @Test
+    public void testCheckMethods() {
+
     }
 
     @Test

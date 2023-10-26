@@ -30,7 +30,7 @@ public class PieceMovement implements PieceInterface {
         try {
             checkTargetedAndSelectedTile(board, selectedTile, targetTile);
             checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
-            board.performMove(selectionIndex, targetIndex); //TODO update method and fix Logictiles as parameters and replace with indexes
+            board.performMove(selectionIndex, targetIndex);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             return null;
         } catch (InvalidTargetedTileException e) {

@@ -127,10 +127,10 @@ public class PieceMovementLogic implements PieceInterface {
     }
 
     private void checkTargetedAndSelectedTile(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
-        if (selectedTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite()) {
+        if (selectedTile.getPieceOnTile().isColorWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }
-        if (targetTile.getPieceOnTile().isColorIsWhite() == board.isMoveOrderWhite()) {
+        if (targetTile.getPieceOnTile().isColorWhite() == board.isMoveOrderWhite()) {
             throw new InvalidTargetedTileException();
         }
         if (targetTile.getPieceOnTile() != null) {

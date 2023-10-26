@@ -1,17 +1,13 @@
 package board;
 
-import board.ChessBoard;
-import board.LogicTile;
 import error.*;
-import jdk.jpackage.internal.Log;
-import lombok.Setter;
 import model.PieceInterface;
 import model.Piece_Type;
 import pieces.Pawn;
 
 import java.util.Objects;
 
-public class PieceMovement implements PieceInterface {
+public class PieceMovementLogic implements PieceInterface {
     boolean targetTileHasOpposingPiece = false;
     byte targetIndex;
     byte selectionIndex;
@@ -20,8 +16,8 @@ public class PieceMovement implements PieceInterface {
     boolean leftwards;
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte selectionIndex, byte targetIndex) {
-        LogicTile selectedTile = board.getLogicTiles()[selectionIndex];
-        LogicTile targetTile = board.getLogicTiles()[targetIndex];
+        LogicTile selectedTile = getLogicTileFromBoard(board, selectionIndex);
+        LogicTile targetTile = getLogicTileFromBoard(board, targetIndex);
         moveIsDiagonal = LogicTileCalculator.isDiagonal(selectionIndex, targetIndex);
         upwards = board.isMoveOrderWhite();
         leftwards = moveIsDiagonal && LogicTileCalculator.isLeftwards(selectionIndex, targetIndex);
@@ -29,7 +25,7 @@ public class PieceMovement implements PieceInterface {
 
         try {
             checkTargetedAndSelectedTile(board, selectedTile, targetTile);
-            checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
+            checkIfTargetedTileIsAccessible(board, selectedTile, targetTile);
             board.performMove(selectionIndex, targetIndex);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             return null;
@@ -43,7 +39,9 @@ public class PieceMovement implements PieceInterface {
     }
 
 
-    private void checkIfTargetedTileIsAccessible(Piece_Type piece_type, ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkIfTargetedTileIsAccessible(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+        Piece_Type piece_type = selectedTile.getPieceOnTile().getType();
+
         try {
             if (piece_type == Piece_Type.PAWN) {
                 checkIfPawnCanMove(board, selectedTile, targetTile);
@@ -135,7 +133,7 @@ public class PieceMovement implements PieceInterface {
         if (targetTile.getPieceOnTile().isColorIsWhite() == board.isMoveOrderWhite()) {
             throw new InvalidTargetedTileException();
         }
-        if (targetTile.getPieceOnTile().isColorIsWhite() != board.isMoveOrderWhite() && targetTile.getPieceOnTile() != null) {
+        if (targetTile.getPieceOnTile() != null) {
             targetTileHasOpposingPiece = true;
         }
     }

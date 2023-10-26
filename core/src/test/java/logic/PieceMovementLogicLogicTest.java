@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class PieceMovementLogicLogicTest { //TODO extend method to also check for correct color
     private static ChessBoard chessBoard;
@@ -18,12 +18,13 @@ public class PieceMovementLogicLogicTest { //TODO extend method to also check fo
     private static byte[] indexesToCheck;
 
     @BeforeClass
-    public static void setUpChessBoard() {
+    public static void setup() {
         chessBoard = new ChessBoard();
+        pieceMovementLogic = new PieceMovementLogic();
     }
 
     @Before
-    public void setUpLogicTilesAndIndexes() {
+    public void setupLogicTilesAndIndexes() {
         tiles = chessBoard.getLogicTiles();
         indexesToCheck = null;
     }
@@ -80,6 +81,22 @@ public class PieceMovementLogicLogicTest { //TODO extend method to also check fo
         }
         for (byte index : indexesToCheck) {
             assertEquals(tiles[index].getPieceOnTile().getType(), Piece_Type.PAWN);
+        }
+    }
+
+    @Test
+    public void testColorOfPieces() {
+        byte[] whitePieceIndexes = new byte[16];
+        byte[] blackPieceIndexes = new byte[16];
+
+        for (byte k = 0; k < whitePieceIndexes.length; k++) {
+            whitePieceIndexes[k] = k;
+            blackPieceIndexes[k] = (byte) (k + 48);
+        }
+
+        for (byte i = 0; i < whitePieceIndexes.length; i++) {
+            assertTrue(tiles[whitePieceIndexes[i]].getPieceOnTile().isColorWhite());
+            assertFalse(tiles[blackPieceIndexes[i]].getPieceOnTile().isColorWhite());
         }
     }
 

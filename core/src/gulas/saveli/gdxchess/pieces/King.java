@@ -18,7 +18,7 @@ public class King extends Piece {
     @Override
     public String toString() {
         String king = "King";
-        if (isColorIsWhite()) {
+        if (isColorWhite()) {
             return "White " + king;
         } else {
             return "Black " + king;

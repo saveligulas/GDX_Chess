@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Piece implements PieceInterface {
     private Piece_Type type;
-    private boolean colorIsWhite;
+    private boolean colorWhite;
     //TODO override setters of bytes to set ranges
     private byte column;
     private byte row;
@@ -14,8 +14,8 @@ public class Piece implements PieceInterface {
     public Piece() {
     }
 
-    public Piece(boolean colorIsWhite) {
-        setColorIsWhite(colorIsWhite);
+    public Piece(boolean colorWhite) {
+        setColorWhite(colorWhite);
     }
 
     protected void movePiece(byte x_coordinate, byte y_coordinate) {
@@ -39,7 +39,7 @@ public class Piece implements PieceInterface {
     public char[] twoCharPieceInsigne() {
         char color;
         char sign = 'e';
-        if (colorIsWhite) {
+        if (colorWhite) {
             color = 'w';
         } else {
             color = 'b';

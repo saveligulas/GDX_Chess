@@ -30,6 +30,10 @@ allprojects {
         junitVersion = '4.13.2'
     }
 
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << '-Xlint:-options'
+    }
+
     repositories {
         mavenLocal()
         mavenCentral()

@@ -20,6 +20,8 @@ public class PieceMovement implements PieceInterface {
     boolean leftwards;
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte selectionIndex, byte targetIndex) {
+        LogicTile selectedTile = board.getLogicTiles()[selectionIndex];
+        LogicTile targetTile = board.getLogicTiles()[targetIndex];
         moveIsDiagonal = LogicTileCalculator.isDiagonal(selectionIndex, targetIndex);
         upwards = board.isMoveOrderWhite();
         leftwards = moveIsDiagonal && LogicTileCalculator.isLeftwards(selectionIndex, targetIndex);
@@ -28,7 +30,7 @@ public class PieceMovement implements PieceInterface {
         try {
             checkTargetedAndSelectedTile(board, selectedTile, targetTile);
             checkIfTargetedTileIsAccessible(selectedTile.getPieceOnTile().getType(), board, selectedTile, targetTile);
-            // board.performMove(selectedTile, targetTile); //TODO update method and fix Logictiles as parameters and replace with indexes
+            board.performMove(selectionIndex, targetIndex); //TODO update method and fix Logictiles as parameters and replace with indexes
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             return null;
         } catch (InvalidTargetedTileException e) {

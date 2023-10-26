@@ -15,7 +15,7 @@ public class PieceMovementLogic implements PieceInterface {
     boolean upwards;
     boolean leftwards;
 
-    public ChessBoard returnUpdatedBoard(ChessBoard board, byte selectionIndex, byte targetIndex) {
+    public ChessBoard returnUpdatedBoard(ChessBoard board, byte selectionIndex, byte targetIndex) { //TODO use TileMoveData and Calculator to simplify and cleanup method/class
         Tile selectedTile = getLogicTileFromBoard(board, selectionIndex);
         Tile targetTile = getLogicTileFromBoard(board, targetIndex);
         moveIsDiagonal = TileCalculator.isDiagonal(selectionIndex, targetIndex);

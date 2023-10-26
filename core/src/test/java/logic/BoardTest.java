@@ -1,9 +1,8 @@
 package logic;
 
 import board.ChessBoard;
-import board.LogicTile;
-import board.LogicTileCalculator;
-import model.Piece_Type;
+import board.Tile;
+import board.TileCalculator;
 import org.junit.Before;
 import org.junit.Test;
 import pieces.Pawn;
@@ -11,7 +10,7 @@ import pieces.Rook;
 
 import static org.junit.Assert.assertEquals;
 
-public class BoardAndTileLogicTest {
+public class BoardTest {
     static ChessBoard board;
 
     @Before
@@ -23,13 +22,13 @@ public class BoardAndTileLogicTest {
     public void boardAndTileSetCalculationTest() {
         byte correctTilesFound = 0;
 
-        for(LogicTile logicTile : board.getLogicTiles()) {
-            byte x = logicTile.getX_coordinate();
-            byte y = logicTile.getY_coordinate();
+        for(Tile tile : board.getTiles()) {
+            byte x = tile.getX_coordinate();
+            byte y = tile.getY_coordinate();
 
-            byte calIndex = LogicTileCalculator.getIndex(x, y);
-            LogicTile calLogicTile = board.getLogicTiles()[calIndex];
-            if (calLogicTile.equals(logicTile)) {
+            byte calIndex = TileCalculator.getIndex(x, y);
+            Tile calTile = board.getTiles()[calIndex];
+            if (calTile.equals(tile)) {
                 correctTilesFound++;
             }
         }
@@ -40,6 +39,6 @@ public class BoardAndTileLogicTest {
     public void testBoardMoves() {
         board.performMove((byte) 0, (byte) 12);
         assertEquals(board.getRemovedPieces().get(0).getClass(), Pawn.class);
-        assertEquals(board.getLogicTiles()[12].getPieceOnTile().getClass(), Rook.class);
+        assertEquals(board.getTiles()[12].getPieceOnTile().getClass(), Rook.class);
     }
 }

@@ -3,29 +3,27 @@ package board;
 import lombok.Data;
 import model.Piece;
 
-import java.sql.Array;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class ChessBoard {
-    private final LogicTile[] logicTiles;
+    private final Tile[] tiles;
 
     private boolean moveOrderWhite = true;
 
     private List<Piece> removedPieces = new ArrayList<>();
 
     public ChessBoard() {
-        this.logicTiles = LogicTile.getStandard64Tiles();
+        this.tiles = Tile.getStandard64Tiles();
     }
 
     public void performMove(byte selectedIndex, byte targetedIndex) {
-        Piece selectedPiece = logicTiles[selectedIndex].getPieceOnTile();
-        if (logicTiles[targetedIndex].getPieceOnTile() != null) {
-            removedPieces.add(logicTiles[targetedIndex].getPieceOnTile());
+        Piece selectedPiece = tiles[selectedIndex].getPieceOnTile();
+        if (tiles[targetedIndex].getPieceOnTile() != null) {
+            removedPieces.add(tiles[targetedIndex].getPieceOnTile());
         }
-        logicTiles[targetedIndex].setPieceOnTile(selectedPiece);
-        logicTiles[selectedIndex].setPieceOnTile(null);
+        tiles[targetedIndex].setPieceOnTile(selectedPiece);
+        tiles[selectedIndex].setPieceOnTile(null);
     }
 }

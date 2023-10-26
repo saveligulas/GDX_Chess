@@ -3,11 +3,10 @@ package board;
 import error.NoPieceToPlaceOnTileException;
 import lombok.Data;
 import model.Piece;
-import model.Piece_Type;
 import pieces.*;
 
 @Data
-public class LogicTile {
+public class Tile {
     //TODO override setters and add limits
     private byte x_coordinate;
     private byte y_coordinate;
@@ -15,25 +14,25 @@ public class LogicTile {
     private Piece pieceOnTile = null;
 
     public byte getIndex() {
-        return LogicTileCalculator.getIndex(this.x_coordinate, this.y_coordinate);
+        return TileCalculator.getIndex(this.x_coordinate, this.y_coordinate);
     }
 
-    public static LogicTile[] getStandard64Tiles() {
-        LogicTile[] logicTiles = new LogicTile[64];
+    public static Tile[] getStandard64Tiles() {
+        Tile[] tiles = new Tile[64];
         for (byte rows = 0; rows < 8; rows++) {
             for (byte columns = 0; columns < 8; columns++) {
                 byte index = (byte) ((rows*8)+columns);
-                LogicTile logicTile = new LogicTile();
-                logicTile.setY_coordinate(rows);
-                logicTile.setX_coordinate(columns);
+                Tile tile = new Tile();
+                tile.setY_coordinate(rows);
+                tile.setX_coordinate(columns);
                 try {
                     Piece piece = checkIndexForPossiblePiece(index, columns, rows);
-                    logicTile.setPieceOnTile(piece);
+                    tile.setPieceOnTile(piece);
                 } catch (NoPieceToPlaceOnTileException ignored) {}
-                logicTiles[index] = logicTile;
+                tiles[index] = tile;
             }
         }
-        return logicTiles;
+        return tiles;
     }
 
     private static Piece checkIndexForPossiblePiece(byte index, byte column, byte row) {

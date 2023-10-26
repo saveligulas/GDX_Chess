@@ -1,7 +1,6 @@
 package gulas.saveli.gdxchess;
 
 import app.ChessGame;
-import board.LogicTileCalculator;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 

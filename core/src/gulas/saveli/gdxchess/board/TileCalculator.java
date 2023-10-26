@@ -5,7 +5,7 @@ import error.CoordinateOutOfBoundsException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogicTileCalculator {
+public class TileCalculator {
     public static byte[] getCoordinatesXandY(byte index) {
         int row = index / 8;
         int col = index % 8;

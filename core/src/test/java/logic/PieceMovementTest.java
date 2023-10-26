@@ -1,8 +1,8 @@
 package logic;
 
 import board.ChessBoard;
-import board.LogicTile;
-import board.LogicTileCalculator;
+import board.Tile;
+import board.TileCalculator;
 import board.PieceMovementLogic;
 import model.Piece_Type;
 import org.junit.Before;
@@ -11,10 +11,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class PieceMovementLogicLogicTest { //TODO extend method to also check for correct color
+public class PieceMovementTest { //TODO extend method to also check for correct color
     private static ChessBoard chessBoard;
     private static PieceMovementLogic pieceMovementLogic;
-    private static LogicTile[] tiles;
+    private static Tile[] tiles;
     private static byte[] indexesToCheck;
 
     @BeforeClass
@@ -25,7 +25,7 @@ public class PieceMovementLogicLogicTest { //TODO extend method to also check fo
 
     @Before
     public void setupLogicTilesAndIndexes() {
-        tiles = chessBoard.getLogicTiles();
+        tiles = chessBoard.getTiles();
         indexesToCheck = null;
     }
 
@@ -74,9 +74,9 @@ public class PieceMovementLogicLogicTest { //TODO extend method to also check fo
         indexesToCheck = new byte[16];
         for (int i = 0; i < indexesToCheck.length; i++) {
             if (i < 8) {
-                indexesToCheck[i] = LogicTileCalculator.getIndex((byte) i, (byte) 1);
+                indexesToCheck[i] = TileCalculator.getIndex((byte) i, (byte) 1);
             } else {
-                indexesToCheck[i] = LogicTileCalculator.getIndex((byte) ((byte) i/2), (byte) 6);
+                indexesToCheck[i] = TileCalculator.getIndex((byte) ((byte) i/2), (byte) 6);
             }
         }
         for (byte index : indexesToCheck) {

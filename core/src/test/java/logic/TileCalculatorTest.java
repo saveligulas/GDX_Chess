@@ -1,13 +1,13 @@
 package logic;
 
-import board.LogicTileCalculator;
+import board.TileCalculator;
 import error.CoordinateOutOfBoundsException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class LogicCalculatorTest {
+public class TileCalculatorTest {
     static MoveData[] verticalData;
     static MoveData[] horizontalData;
     static MoveData[] diagonalData;
@@ -71,7 +71,7 @@ public class LogicCalculatorTest {
 
         for (byte rows = 0; rows < 8; rows++) {
             for (byte columns = 0; columns < 8; columns++) {
-                calculatedAnswers[LogicTileCalculator.getIndex(columns, rows)] = LogicTileCalculator.getIndex(columns, rows);
+                calculatedAnswers[TileCalculator.getIndex(columns, rows)] = TileCalculator.getIndex(columns, rows);
             }
         }
 
@@ -83,7 +83,7 @@ public class LogicCalculatorTest {
     @Test
     public void testGetIndexVerticalCalculations() {
         for (MoveData data : verticalData) {
-            byte calculation = LogicTileCalculator.getIndexFromVerticalMove(data.isUpwards(), data.getRange(), data.getStartIndex());
+            byte calculation = TileCalculator.getIndexFromVerticalMove(data.isUpwards(), data.getRange(), data.getStartIndex());
             assertEquals(calculation, data.getEndIndex());
         }
     }
@@ -93,7 +93,7 @@ public class LogicCalculatorTest {
         for (MoveData data : horizontalData) {
             byte calculation;
             try {
-                calculation = LogicTileCalculator.getIndexFromHorizontalMove(data.isLeftwards(), data.getRange(), data.getStartIndex());
+                calculation = TileCalculator.getIndexFromHorizontalMove(data.isLeftwards(), data.getRange(), data.getStartIndex());
             } catch (CoordinateOutOfBoundsException e) {
                 calculation = -1;
             }
@@ -104,7 +104,7 @@ public class LogicCalculatorTest {
     @Test
     public void testGetIndexForPossibleKnightMoves() {
         for (MoveData data : knightData) {
-            byte[] calculations = LogicTileCalculator.getPossibleIndexForKnightMove(data.getStartIndex());
+            byte[] calculations = TileCalculator.getPossibleIndexForKnightMove(data.getStartIndex());
             assertEquals(calculations.length, data.getEndIndexes().length);
             for (int i = 0; i < calculations.length; i++) {
                 assertEquals(calculations[i], data.getEndIndexes()[i]);

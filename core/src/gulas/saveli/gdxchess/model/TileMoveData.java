@@ -3,7 +3,7 @@ package model;
 import lombok.Data;
 
 @Data
-public class LogicTileMoveData {
+public class TileMoveData {
     private boolean upwards;
     private boolean leftwards;
     private byte range;

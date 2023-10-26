@@ -16,11 +16,11 @@ public class PieceMovementLogic implements PieceInterface {
     boolean leftwards;
 
     public ChessBoard returnUpdatedBoard(ChessBoard board, byte selectionIndex, byte targetIndex) {
-        LogicTile selectedTile = getLogicTileFromBoard(board, selectionIndex);
-        LogicTile targetTile = getLogicTileFromBoard(board, targetIndex);
-        moveIsDiagonal = LogicTileCalculator.isDiagonal(selectionIndex, targetIndex);
+        Tile selectedTile = getLogicTileFromBoard(board, selectionIndex);
+        Tile targetTile = getLogicTileFromBoard(board, targetIndex);
+        moveIsDiagonal = TileCalculator.isDiagonal(selectionIndex, targetIndex);
         upwards = board.isMoveOrderWhite();
-        leftwards = moveIsDiagonal && LogicTileCalculator.isLeftwards(selectionIndex, targetIndex);
+        leftwards = moveIsDiagonal && TileCalculator.isLeftwards(selectionIndex, targetIndex);
 
 
         try {
@@ -39,7 +39,7 @@ public class PieceMovementLogic implements PieceInterface {
     }
 
 
-    private void checkIfTargetedTileIsAccessible(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkIfTargetedTileIsAccessible(ChessBoard board, Tile selectedTile, Tile targetTile) {
         Piece_Type piece_type = selectedTile.getPieceOnTile().getType();
 
         try {
@@ -73,23 +73,23 @@ public class PieceMovementLogic implements PieceInterface {
         }
     }
 
-    private void checkIfPawnCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
-        if (LogicTileCalculator.getIndexFromDiagonalMove(upwards, leftwards, (byte) 1, selectionIndex) == targetIndex) {
+    private void checkIfPawnCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
+        if (TileCalculator.getIndexFromDiagonalMove(upwards, leftwards, (byte) 1, selectionIndex) == targetIndex) {
             if (!targetTileHasOpposingPiece) {
                 throw new PieceUnableToReachTileException();
             }
             return;
         }
-        if (LogicTileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex) == targetIndex) {
+        if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex) == targetIndex) {
             if (targetTileHasOpposingPiece) {
                 throw new PieceUnableToReachTileException();
             }
             return;
         }
-        if (LogicTileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex &&
+        if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex &&
                 selectedTile.getPieceOnTile() instanceof Pawn && ((Pawn) selectedTile.getPieceOnTile()).getPawnHasMoved()) {
-            byte[] tileToCheck = LogicTileCalculator.getIndexesBetweenVerticalMove(upwards, (byte) 2, selectionIndex);
-            if (board.getLogicTiles()[Objects.requireNonNull(tileToCheck)[0]].getPieceOnTile() != null) {
+            byte[] tileToCheck = TileCalculator.getIndexesBetweenVerticalMove(upwards, (byte) 2, selectionIndex);
+            if (board.getTiles()[Objects.requireNonNull(tileToCheck)[0]].getPieceOnTile() != null) {
                 throw new PieceBetweenTilesException();
             }
             return;
@@ -97,36 +97,36 @@ public class PieceMovementLogic implements PieceInterface {
         throw new PieceUnableToReachTileException();
     }
 
-    private void checkIfKingCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkIfKingCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
 
     }
 
-    private void checkIfKnightCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkIfKnightCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
 
     }
 
-    private void checkIfBishopCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkIfBishopCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
 
     }
 
-    private void checkIfRookCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkIfRookCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
 
     }
 
-    private void checkIfQueenCanMove(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkIfQueenCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
 
     }
 
-    private LogicTile getLogicTileFromBoard(ChessBoard board, byte index) {
-        LogicTile[] logicTiles = board.getLogicTiles();
+    private Tile getLogicTileFromBoard(ChessBoard board, byte index) {
+        Tile[] tiles = board.getTiles();
         try {
-            return logicTiles[index];
+            return tiles[index];
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new CoordinateOutOfBoundsException();
         }
     }
 
-    private void checkTargetedAndSelectedTile(ChessBoard board, LogicTile selectedTile, LogicTile targetTile) {
+    private void checkTargetedAndSelectedTile(ChessBoard board, Tile selectedTile, Tile targetTile) {
         if (selectedTile.getPieceOnTile().isColorWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }

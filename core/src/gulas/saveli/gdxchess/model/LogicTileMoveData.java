@@ -1,5 +1,8 @@
 package model;
 
+import lombok.Data;
+
+@Data
 public class LogicTileMoveData {
     private boolean upwards;
     private boolean leftwards;

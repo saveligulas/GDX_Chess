@@ -15,14 +15,13 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PieceMovementTest { //TODO extend method to also check for correct color
-    private static ChessBoard chessBoard;
     private static PieceMovementLogic pieceMovementLogic;
     private static Tile[] tiles;
     private static byte[] indexesToCheck;
 
     @Before
     public void setup() {
-        chessBoard = new ChessBoard();
+        ChessBoard chessBoard = new ChessBoard();
         pieceMovementLogic = new PieceMovementLogic(chessBoard);
         tiles = chessBoard.getTiles();
         indexesToCheck = null;

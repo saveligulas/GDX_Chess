@@ -35,8 +35,8 @@ public class PieceMovementLogic implements PieceInterface {
         CustomMessage message = new CustomMessage();
 
         try {
-            checkTargetedAndSelectedTile(board, selectedTile, targetTile);
-            checkIfTargetedTileIsAccessible(board, selectedTile, targetTile);
+            checkTargetedAndSelectedTile();
+            checkIfTargetedTileIsAccessible();
             board.performMove(selectionIndex, targetIndex);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
             message.setException(e);
@@ -61,27 +61,27 @@ public class PieceMovementLogic implements PieceInterface {
 
         try {
             if (piece_type == Piece_Type.PAWN) {
-                checkIfPawnCanMove(board, selectedTile, targetTile);
+                checkIfPawnCanMove();
             }
 
             if (piece_type == Piece_Type.KING) {
-                checkIfKingCanMove(board, selectedTile, targetTile);
+                checkIfKingCanMove();
             }
 
             if (piece_type == Piece_Type.KNIGHT) {
-                checkIfKnightCanMove(board, selectedTile, targetTile);
+                checkIfKnightCanMove();
             }
 
             if (piece_type == Piece_Type.BISHOP) {
-                checkIfBishopCanMove(board, selectedTile, targetTile);
+                checkIfBishopCanMove();
             }
 
             if (piece_type == Piece_Type.ROOK) {
-                checkIfRookCanMove(board, selectedTile, targetTile);
+                checkIfRookCanMove();
             }
 
             if (piece_type == Piece_Type.QUEEN) {
-                checkIfQueenCanMove(board, selectedTile, targetTile);
+                checkIfQueenCanMove();
             }
         } catch (PieceUnableToReachTileException e) {
             return;
@@ -118,23 +118,23 @@ public class PieceMovementLogic implements PieceInterface {
 
     }
 
-    private void checkIfKnightCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkIfKnightCanMove() {
 
     }
 
-    private void checkIfBishopCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkIfBishopCanMove() {
 
     }
 
-    private void checkIfRookCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkIfRookCanMove() {
 
     }
 
-    private void checkIfQueenCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkIfQueenCanMove() {
 
     }
 
-    private Tile getLogicTileFromBoard(ChessBoard board, byte index) {
+    private Tile getLogicTileFromBoard(byte index) {
         Tile[] tiles = board.getTiles();
         try {
             return tiles[index];
@@ -143,7 +143,7 @@ public class PieceMovementLogic implements PieceInterface {
         }
     }
 
-    private void checkTargetedAndSelectedTile(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkTargetedAndSelectedTile() {
         if (selectedTile.getPieceOnTile().isColorWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }

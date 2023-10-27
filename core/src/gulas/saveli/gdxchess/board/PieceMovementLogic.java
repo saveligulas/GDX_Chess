@@ -41,19 +41,7 @@ public class PieceMovementLogic implements PieceInterface {
             checkTargetedAndSelectedTile();
             checkIfTargetedTileIsAccessible();
             board.performMove(selectionIndex, targetIndex);
-        } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
-            message.setException(e);
-            return message;
-        } catch (InvalidTargetedTileException e) {
-            message.setException(e);
-            return message;
-        } catch (ArrayIndexOutOfBoundsException e) { //TODO override setters of LogicTiles/Pieces to not allow invalid values and throw exception
-            message.setException(e);
-            return message;
-        } catch (PieceUnableToReachTileException e) {
-            message.setException(e);
-            return message;
-        } catch (CoordinateOutOfBoundsException e) {
+        } catch (RuntimeException e) {
             message.setException(e);
             return message;
         }

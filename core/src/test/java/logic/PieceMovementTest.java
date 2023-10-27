@@ -101,8 +101,12 @@ public class PieceMovementTest { //TODO extend method to also check for correct 
 
     @Test
     public void testCheckMethods() {
-        assertEquals(InvalidTileSelectionException.class, pieceMovementLogic.updateBoard((byte) 48, (byte) 34).getException().getClass());
-        assertEquals(InvalidTargetedTileException.class, pieceMovementLogic.updateBoard((byte) 8, (byte) 0).getException().getClass());
+        for (byte i = 16; i < 48; i++) {
+            assertEquals(InvalidTileSelectionException.class, pieceMovementLogic.updateBoard(i, i).getException().getClass());
+        }
+        for (byte k = 0; k < 16; k++) {
+            assertEquals(InvalidTargetedTileException.class, pieceMovementLogic.updateBoard(k, k).getException().getClass());
+        }
     }
 
     @Test

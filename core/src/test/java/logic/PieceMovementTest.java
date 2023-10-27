@@ -4,6 +4,9 @@ import board.ChessBoard;
 import board.Tile;
 import board.TileCalculator;
 import board.PieceMovementLogic;
+import error.InvalidTargetedTileException;
+import error.InvalidTileSelectionException;
+import error.PieceUnableToReachTileException;
 import model.Piece_Type;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,7 +23,7 @@ public class PieceMovementTest { //TODO extend method to also check for correct 
     @BeforeClass
     public static void setup() {
         chessBoard = new ChessBoard();
-        pieceMovementLogic = new PieceMovementLogic();
+        pieceMovementLogic = new PieceMovementLogic(chessBoard);
     }
 
     @Before
@@ -102,11 +105,12 @@ public class PieceMovementTest { //TODO extend method to also check for correct 
 
     @Test
     public void testCheckMethods() {
-
+        assertEquals(InvalidTileSelectionException.class, pieceMovementLogic.updateBoard((byte) 48, (byte) 34).getException().getClass());
+        assertEquals(InvalidTargetedTileException.class, pieceMovementLogic.updateBoard((byte) 8, (byte) 0).getException().getClass());
     }
 
     @Test
     public void testPawnMovement() {
-
+        assertEquals(PieceUnableToReachTileException.class, pieceMovementLogic.updateBoard((byte) 8, (byte) 32).getException().getClass());
     }
 }

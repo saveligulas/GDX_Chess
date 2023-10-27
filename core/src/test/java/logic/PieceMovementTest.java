@@ -112,6 +112,6 @@ public class PieceMovementTest { //TODO extend method to also check for correct 
     @Test
     public void testPawnMovement() {
         assertEquals(PieceUnableToReachTileException.class, pieceMovementLogic.updateBoard((byte) 8, (byte) 32).getException().getClass());
-        assertEquals(null, pieceMovementLogic.updateBoard((byte) 8, (byte) 16).getException());
+        assertNull(pieceMovementLogic.updateBoard((byte) 8, (byte) 16).getException());
     }
 }

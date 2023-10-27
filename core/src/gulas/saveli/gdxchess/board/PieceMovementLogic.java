@@ -148,7 +148,7 @@ public class PieceMovementLogic implements PieceInterface {
     }
 
     private void checkTargetedAndSelectedTile() {
-        if (selectedTile.getPieceOnTile().isColorWhite() != board.isMoveOrderWhite()) {
+        if (selectedTile.getPieceOnTile() == null || selectedTile.getPieceOnTile().isColorWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }
         if (targetTile.getPieceOnTile() == null) {

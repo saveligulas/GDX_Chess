@@ -50,6 +50,12 @@ public class PieceMovementLogic implements PieceInterface {
         } catch (ArrayIndexOutOfBoundsException e) { //TODO override setters of LogicTiles/Pieces to not allow invalid values and throw exception
             message.setException(e);
             return message;
+        } catch (PieceUnableToReachTileException e) {
+            message.setException(e);
+            return message;
+        } catch (CoordinateOutOfBoundsException e) {
+            message.setException(e);
+            return message;
         }
 
         message.setException(null);
@@ -62,35 +68,30 @@ public class PieceMovementLogic implements PieceInterface {
     private void checkIfTargetedTileIsAccessible() {
         Piece_Type piece_type = selectedTile.getPieceOnTile().getType();
 
-        try {
-            if (piece_type == Piece_Type.PAWN) {
-                checkIfPawnCanMove();
-            }
-
-            if (piece_type == Piece_Type.KING) {
-                checkIfKingCanMove();
-            }
-
-            if (piece_type == Piece_Type.KNIGHT) {
-                checkIfKnightCanMove();
-            }
-
-            if (piece_type == Piece_Type.BISHOP) {
-                checkIfBishopCanMove();
-            }
-
-            if (piece_type == Piece_Type.ROOK) {
-                checkIfRookCanMove();
-            }
-
-            if (piece_type == Piece_Type.QUEEN) {
-                checkIfQueenCanMove();
-            }
-        } catch (PieceUnableToReachTileException e) {
-            return;
-        } catch (PieceMoveCausesCheckException e) {
-            return;
+        if (piece_type == Piece_Type.PAWN) {
+            checkIfPawnCanMove();
         }
+
+        if (piece_type == Piece_Type.KING) {
+            checkIfKingCanMove();
+        }
+
+        if (piece_type == Piece_Type.KNIGHT) {
+            checkIfKnightCanMove();
+        }
+
+        if (piece_type == Piece_Type.BISHOP) {
+            checkIfBishopCanMove();
+        }
+
+        if (piece_type == Piece_Type.ROOK) {
+            checkIfRookCanMove();
+        }
+
+        if (piece_type == Piece_Type.QUEEN) {
+            checkIfQueenCanMove();
+        }
+
     }
 
     private void checkIfPawnCanMove() {
@@ -150,12 +151,13 @@ public class PieceMovementLogic implements PieceInterface {
         if (selectedTile.getPieceOnTile().isColorWhite() != board.isMoveOrderWhite()) {
             throw new InvalidTileSelectionException();
         }
+        if (targetTile.getPieceOnTile() == null) {
+            return;
+        }
         if (targetTile.getPieceOnTile().isColorWhite() == board.isMoveOrderWhite()) {
             throw new InvalidTargetedTileException();
         }
-        if (targetTile.getPieceOnTile() != null) {
-            targetTileHasOpposingPiece = true;
-        }
+        targetTileHasOpposingPiece = true;
     }
 
     @Override

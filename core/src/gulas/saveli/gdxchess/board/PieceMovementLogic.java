@@ -1,6 +1,7 @@
 package board;
 
 import error.*;
+import lombok.Getter;
 import model.CustomMessage;
 import model.PieceInterface;
 import model.Piece_Type;
@@ -8,35 +9,46 @@ import pieces.Pawn;
 
 import java.util.Objects;
 
+@Getter
 public class PieceMovementLogic implements PieceInterface {
-    boolean targetTileHasOpposingPiece = false;
-    byte targetIndex;
-    byte selectionIndex;
-    boolean moveIsDiagonal;
-    boolean upwards;
-    boolean leftwards;
+    private boolean targetTileHasOpposingPiece = false;
+    private byte targetIndex;
+    private byte selectionIndex;
+    private boolean moveIsDiagonal;
+    private boolean upwards;
+    private boolean leftwards;
+
+    private Tile selectedTile;
+    private Tile targetTile;
+    private ChessBoard board;
 
     public CustomMessage updateBoard(ChessBoard board, byte selectionIndex, byte targetIndex) { //TODO use TileMoveData and Calculator to simplify and cleanup method/class
-        Tile selectedTile = getLogicTileFromBoard(board, selectionIndex);
-        Tile targetTile = getLogicTileFromBoard(board, targetIndex);
-        moveIsDiagonal = TileCalculator.isDiagonal(selectionIndex, targetIndex);
-        upwards = board.isMoveOrderWhite();
-        leftwards = moveIsDiagonal && TileCalculator.isLeftwards(selectionIndex, targetIndex);
+        this.targetIndex = targetIndex;
+        this.selectionIndex = selectionIndex;
+        this.selectedTile = getLogicTileFromBoard(board, selectionIndex);
+        this.targetTile = getLogicTileFromBoard(board, targetIndex);
+        this.moveIsDiagonal = TileCalculator.isDiagonal(selectionIndex, targetIndex);
+        this.upwards = board.isMoveOrderWhite();
+        this.leftwards = moveIsDiagonal && TileCalculator.isLeftwards(selectionIndex, targetIndex);
+        this.board = board;
 
+        CustomMessage message = new CustomMessage();
 
         try {
             checkTargetedAndSelectedTile(board, selectedTile, targetTile);
             checkIfTargetedTileIsAccessible(board, selectedTile, targetTile);
             board.performMove(selectionIndex, targetIndex);
         } catch (InvalidTileSelectionException e) { //TODO ADD custom return Statements to give info to player
-            return null;
+            message.setException(e);
+            return message;
         } catch (InvalidTargetedTileException e) {
-            return null;
+            message.setException(e);
+            return message;
         } catch (ArrayIndexOutOfBoundsException e) { //TODO override setters of LogicTiles/Pieces to not allow invalid values and throw exception
-            return null;
+            message.setException(e);
+            return message;
         }
 
-        CustomMessage message = new CustomMessage();
         message.setException(null);
         message.setMessage("Successful");
 
@@ -44,7 +56,7 @@ public class PieceMovementLogic implements PieceInterface {
     }
 
 
-    private void checkIfTargetedTileIsAccessible(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkIfTargetedTileIsAccessible() {
         Piece_Type piece_type = selectedTile.getPieceOnTile().getType();
 
         try {
@@ -78,7 +90,7 @@ public class PieceMovementLogic implements PieceInterface {
         }
     }
 
-    private void checkIfPawnCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkIfPawnCanMove() {
         if (TileCalculator.getIndexFromDiagonalMove(upwards, leftwards, (byte) 1, selectionIndex) == targetIndex) {
             if (!targetTileHasOpposingPiece) {
                 throw new PieceUnableToReachTileException();
@@ -102,7 +114,7 @@ public class PieceMovementLogic implements PieceInterface {
         throw new PieceUnableToReachTileException();
     }
 
-    private void checkIfKingCanMove(ChessBoard board, Tile selectedTile, Tile targetTile) {
+    private void checkIfKingCanMove() {
 
     }
 

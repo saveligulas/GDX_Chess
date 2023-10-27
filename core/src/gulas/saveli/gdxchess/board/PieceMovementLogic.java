@@ -52,7 +52,6 @@ public class PieceMovementLogic implements PieceInterface {
         return message;
     }
 
-
     private void checkIfTargetedTileIsAccessible() {
         Piece_Type piece_type = selectedTile.getPieceOnTile().getType();
 

@@ -36,7 +36,11 @@ public class PieceMovementLogic implements PieceInterface {
             return null;
         }
 
-        return board;
+        CustomMessage message = new CustomMessage();
+        message.setException(null);
+        message.setMessage("Successful");
+
+        return message;
     }
 
 

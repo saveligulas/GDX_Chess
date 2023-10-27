@@ -20,9 +20,13 @@ public class PieceMovementLogic implements PieceInterface {
 
     private Tile selectedTile;
     private Tile targetTile;
-    private ChessBoard board;
+    private final ChessBoard board;
 
-    public CustomMessage updateBoard(ChessBoard board, byte selectionIndex, byte targetIndex) { //TODO use TileMoveData and Calculator to simplify and cleanup method/class
+    public PieceMovementLogic(ChessBoard board) {
+        this.board = board;
+    }
+
+    public CustomMessage updateBoard(byte selectionIndex, byte targetIndex) { //TODO use TileMoveData and Calculator to simplify and cleanup method/class
         this.targetIndex = targetIndex;
         this.selectionIndex = selectionIndex;
         this.selectedTile = getLogicTileFromBoard(selectionIndex);
@@ -30,7 +34,6 @@ public class PieceMovementLogic implements PieceInterface {
         this.moveIsDiagonal = TileCalculator.isDiagonal(selectionIndex, targetIndex);
         this.upwards = board.isMoveOrderWhite();
         this.leftwards = moveIsDiagonal && TileCalculator.isLeftwards(selectionIndex, targetIndex);
-        this.board = board;
 
         CustomMessage message = new CustomMessage();
 

@@ -1,6 +1,7 @@
 package board;
 
 import error.*;
+import model.CustomMessage;
 import model.PieceInterface;
 import model.Piece_Type;
 import pieces.Pawn;
@@ -15,7 +16,7 @@ public class PieceMovementLogic implements PieceInterface {
     boolean upwards;
     boolean leftwards;
 
-    public ChessBoard returnUpdatedBoard(ChessBoard board, byte selectionIndex, byte targetIndex) { //TODO use TileMoveData and Calculator to simplify and cleanup method/class
+    public CustomMessage updateBoard(ChessBoard board, byte selectionIndex, byte targetIndex) { //TODO use TileMoveData and Calculator to simplify and cleanup method/class
         Tile selectedTile = getLogicTileFromBoard(board, selectionIndex);
         Tile targetTile = getLogicTileFromBoard(board, targetIndex);
         moveIsDiagonal = TileCalculator.isDiagonal(selectionIndex, targetIndex);
@@ -31,7 +32,7 @@ public class PieceMovementLogic implements PieceInterface {
             return null;
         } catch (InvalidTargetedTileException e) {
             return null;
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) { //TODO override setters of LogicTiles/Pieces to not allow invalid values and throw exception
             return null;
         }
 

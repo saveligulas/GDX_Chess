@@ -7,6 +7,7 @@ import board.PieceMovementLogic;
 import error.InvalidTargetedTileException;
 import error.InvalidTileSelectionException;
 import error.PieceUnableToReachTileException;
+import model.Piece;
 import model.Piece_Type;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -14,7 +15,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class PieceMovementTest { //TODO extend method to also check for correct color
+public class PieceMovementTest {
     private static PieceMovementLogic pieceMovementLogic;
     private static Tile[] tiles;
     private static byte[] indexesToCheck;
@@ -111,6 +112,11 @@ public class PieceMovementTest { //TODO extend method to also check for correct 
     @Test
     public void testPawnMovement() {
         assertEquals(PieceUnableToReachTileException.class, pieceMovementLogic.updateBoard((byte) 8, (byte) 32).getException().getClass());
+
         assertNull(pieceMovementLogic.updateBoard((byte) 8, (byte) 16).getException());
+        assertEquals(Piece_Type.PAWN, pieceMovementLogic.getBoard().getTiles()[(byte) 16].getPieceOnTile().getType());
+
+        assertNull(pieceMovementLogic.updateBoard((byte) 9, (byte) 25).getException());
+        assertEquals(Piece_Type.PAWN, pieceMovementLogic.getBoard().getTiles()[(byte) 25].getPieceOnTile().getType());
     }
 }

@@ -3,6 +3,7 @@ package board;
 import error.*;
 import lombok.Getter;
 import model.CustomMessage;
+import model.Piece;
 import model.PieceInterface;
 import model.Piece_Type;
 import pieces.Pawn;
@@ -82,27 +83,31 @@ public class PieceMovementLogic implements PieceInterface {
     }
 
     private void checkIfPawnCanMove() {
-        if (TileCalculator.getIndexFromDiagonalMove(upwards, leftwards, (byte) 1, selectionIndex) == targetIndex) {
-            if (!targetTileHasOpposingPiece) {
-                throw new PieceUnableToReachTileException();
-            }
-            return;
+//        if (TileCalculator.getIndexFromDiagonalMove(upwards, leftwards, (byte) 1, selectionIndex) == targetIndex) {
+//            if (!targetTileHasOpposingPiece) {
+//                throw new PieceUnableToReachTileException();
+//            }
+//            return;
+//        }
+//        if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex) == targetIndex) {
+//            if (targetTileHasOpposingPiece) {
+//                throw new PieceUnableToReachTileException();
+//            }
+//            return;
+//        }
+        if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex) != targetIndex && 
+                TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) != targetIndex) {
+            throw new PieceUnableToReachTileException();
         }
-        if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex) == targetIndex) {
-            if (targetTileHasOpposingPiece) {
-                throw new PieceUnableToReachTileException();
-            }
-            return;
-        }
-        if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex &&
-                selectedTile.getPieceOnTile() instanceof Pawn && ((Pawn) selectedTile.getPieceOnTile()).getPawnHasMoved()) {
+        if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex) {
             byte[] tileToCheck = TileCalculator.getIndexesBetweenVerticalMove(upwards, (byte) 2, selectionIndex);
             if (board.getTiles()[Objects.requireNonNull(tileToCheck)[0]].getPieceOnTile() != null) {
                 throw new PieceBetweenTilesException();
             }
-            return;
+            if (selectedTile.getPieceOnTile() instanceof Pawn && ((Pawn) selectedTile.getPieceOnTile()).getPawnHasMoved()) {
+                throw new PawnHasMovedException();
+            }
         }
-        throw new PieceUnableToReachTileException();
     }
 
     private void checkIfKingCanMove() {

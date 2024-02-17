@@ -39,7 +39,7 @@ public class PieceMovementLogic implements PieceInterface {
             checkTargetedAndSelectedTile();
             checkIfTargetedTileIsAccessible();
             board.performMove(selectionIndex, targetIndex);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (RuntimeException e) {
             message.setException(e);
             return message;
         }

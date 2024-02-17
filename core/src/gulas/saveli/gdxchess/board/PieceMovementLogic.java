@@ -81,7 +81,8 @@ public class PieceMovementLogic implements PieceInterface {
 
     private void checkIfPawnCanMove() {
         if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex) != targetIndex && 
-                TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) != targetIndex) {
+                TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) != targetIndex &&
+                    !targetTileHasOpposingPiece) {
             throw new PieceUnableToReachTileException();
         }
         if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex) {

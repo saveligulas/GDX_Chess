@@ -47,9 +47,6 @@ public class PieceMovementLogic implements PieceInterface {
         } catch (ArrayIndexOutOfBoundsException e) {
             message.setException(e);
             return message;
-        } catch (RuntimeException e) {
-            message.setException(e);
-            return message;
         }
 
         message.setException(null);

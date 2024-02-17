@@ -113,8 +113,8 @@ public class PieceMovementTest {
     public void testPawnMovement() {
         assertEquals(PieceUnableToReachTileException.class, pieceMovementLogic.updateBoard((byte) 8, (byte) 32).getException().getClass());
 
-        assertNull(pieceMovementLogic.updateBoard((byte) 8, (byte) 16).getException());
-        assertEquals(Piece_Type.PAWN, pieceMovementLogic.getBoard().getTiles()[(byte) 16].getPieceOnTile().getType());
+        assertNull(pieceMovementLogic.updateBoard((byte) 10, (byte) 18).getException());
+        assertEquals(Piece_Type.PAWN, pieceMovementLogic.getBoard().getTiles()[(byte) 18].getPieceOnTile().getType());
 
         assertNull(pieceMovementLogic.updateBoard((byte) 9, (byte) 25).getException());
         assertEquals(Piece_Type.PAWN, pieceMovementLogic.getBoard().getTiles()[(byte) 25].getPieceOnTile().getType());

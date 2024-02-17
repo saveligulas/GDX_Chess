@@ -118,5 +118,9 @@ public class PieceMovementTest {
 
         assertNull(pieceMovementLogic.updateBoard((byte) 9, (byte) 25).getException());
         assertEquals(Piece_Type.PAWN, pieceMovementLogic.getBoard().getTiles()[(byte) 25].getPieceOnTile().getType());
+
+        pieceMovementLogic.updateBoard((byte) 63, (byte) 17);
+        assertNull(pieceMovementLogic.updateBoard((byte) 8, (byte) 17).getException());
+        assertEquals(Piece_Type.PAWN, pieceMovementLogic.getBoard().getTiles()[(byte) 17].getPieceOnTile().getType());
     }
 }

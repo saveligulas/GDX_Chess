@@ -3,14 +3,9 @@ package board;
 import error.*;
 import lombok.Getter;
 import model.CustomMessage;
-import model.Piece;
 import model.PieceInterface;
 import model.Piece_Type;
 import pieces.Pawn;
-
-import java.util.Objects;
-
-import static board.TileCalculator.getIndexesBetweenVerticalMove;
 
 @Getter
 public class PieceMovementLogic implements PieceInterface {

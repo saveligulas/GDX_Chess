@@ -10,6 +10,8 @@ import pieces.Pawn;
 
 import java.util.Objects;
 
+import static board.TileCalculator.getIndexesBetweenVerticalMove;
+
 @Getter
 public class PieceMovementLogic implements PieceInterface {
     private boolean targetTileHasOpposingPiece = false;
@@ -42,6 +44,9 @@ public class PieceMovementLogic implements PieceInterface {
             checkTargetedAndSelectedTile();
             checkIfTargetedTileIsAccessible();
             board.performMove(selectionIndex, targetIndex);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            message.setException(e);
+            return message;
         } catch (RuntimeException e) {
             message.setException(e);
             return message;
@@ -100,8 +105,8 @@ public class PieceMovementLogic implements PieceInterface {
             throw new PieceUnableToReachTileException();
         }
         if (TileCalculator.getIndexFromVerticalMove(upwards, (byte) 2, selectionIndex) == targetIndex) {
-            byte[] tileToCheck = TileCalculator.getIndexesBetweenVerticalMove(upwards, (byte) 2, selectionIndex);
-            if (board.getTiles()[Objects.requireNonNull(tileToCheck)[0]].getPieceOnTile() != null) {
+            byte tileToCheck = TileCalculator.getIndexFromVerticalMove(upwards, (byte) 1, selectionIndex);
+            if (board.getTiles()[tileToCheck].getPieceOnTile() != null) {
                 throw new PieceBetweenTilesException();
             }
             if (selectedTile.getPieceOnTile() instanceof Pawn && ((Pawn) selectedTile.getPieceOnTile()).getPawnHasMoved()) {

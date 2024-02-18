@@ -33,7 +33,7 @@ public class TileCalculator {
     }
 
     public static boolean isUpwards(byte selectedIndex, byte targetIndex) {
-        return (getCoordinatesXandY(selectedIndex)[1] >= getCoordinatesXandY(targetIndex)[1]);
+        return (getCoordinatesXandY(selectedIndex)[1] <= getCoordinatesXandY(targetIndex)[1]);
     }
 
     public static byte getIndexFromDiagonalMove(boolean upwards, boolean leftwards, byte range, byte selectedIndex) {

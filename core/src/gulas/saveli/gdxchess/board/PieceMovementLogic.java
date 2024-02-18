@@ -94,6 +94,10 @@ public class PieceMovementLogic implements PieceInterface {
                 throw new PawnHasMovedException();
             }
         }
+        if (targetTileHasOpposingPiece &&
+                TileCalculator.getIndexFromDiagonalMove(upwards, leftwards, (byte) 1, selectionIndex) != targetIndex) {
+            throw new PieceUnableToReachTileException();
+        }
     }
 
     private void checkIfKingCanMove() {

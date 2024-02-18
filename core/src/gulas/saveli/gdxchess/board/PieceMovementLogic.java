@@ -30,7 +30,7 @@ public class PieceMovementLogic implements PieceInterface {
         this.selectedTile = getLogicTileFromBoard(selectionIndex);
         this.targetTile = getLogicTileFromBoard(targetIndex);
         this.moveIsDiagonal = TileCalculator.isDiagonal(selectionIndex, targetIndex);
-        this.upwards = board.isMoveOrderWhite();
+        this.upwards = TileCalculator.isUpwards(selectionIndex, targetIndex);
         this.leftwards = moveIsDiagonal && TileCalculator.isLeftwards(selectionIndex, targetIndex);
 
         CustomMessage message = new CustomMessage();

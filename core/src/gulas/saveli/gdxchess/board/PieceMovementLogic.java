@@ -134,12 +134,13 @@ public class PieceMovementLogic implements PieceInterface {
             throw new InvalidTileSelectionException();
         }
         if (targetTile.getPieceOnTile() == null) {
+            this.targetTileHasOpposingPiece = false;
             return;
         }
         if (targetTile.getPieceOnTile().isColorWhite() == board.isMoveOrderWhite()) {
             throw new InvalidTargetedTileException();
         }
-        targetTileHasOpposingPiece = true;
+        this.targetTileHasOpposingPiece = true;
     }
 
     @Override

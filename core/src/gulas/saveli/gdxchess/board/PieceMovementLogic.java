@@ -24,6 +24,10 @@ public class PieceMovementLogic implements PieceInterface {
         this.board = board;
     }
 
+    public void movePiece(byte selectionIndex, byte targetIndex) {
+        board.performMove(selectionIndex, targetIndex);
+    }
+
     public CustomMessage updateBoard(byte selectionIndex, byte targetIndex) { //TODO use TileMoveData and Calculator to simplify and cleanup method/class
         this.targetIndex = targetIndex;
         this.selectionIndex = selectionIndex;
